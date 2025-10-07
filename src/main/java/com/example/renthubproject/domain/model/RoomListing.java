@@ -23,6 +23,8 @@ public class RoomListing {
     private String description;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
+    private String status;
+    private String category;
     private double price;
     private String address;
     private long  views_count;
