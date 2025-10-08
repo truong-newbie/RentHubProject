@@ -71,12 +71,12 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Vai trò</label>
-                                <select class="form-select"  >
-                                    <option value="">-- Chọn vai trò --</option>
-                                    <option value="ADMIN">Admin</option>
-                                    <option value="USER">Người dùng</option>
-                                    <option value="LANDLORD">Người cho thuê</option>
-                                </select>
+                                <form:select class="form-select"  path="role.name">
+                                    <form:option value="">-- Chọn vai trò --</form:option>
+                                    <form:option value="ADMIN">Admin</form:option>
+                                    <form:option value="USER">Người dùng</form:option>
+                                    <form:option value="LANDLORD">Người cho thuê</form:option>
+                                </form:select>
                             </div>
                         </div>
 
@@ -84,6 +84,7 @@
                             <div class="mb-4">
                                 <label class="form-label">Ảnh đại diện (Avatar)</label>
                                 <input class="form-control" type="file" id="avatarFile"
+                                       name="TruongFile"
                                        accept=".png , .jpg, .jpeg">
                             </div>
                             <div class="col-12 mb-3">
