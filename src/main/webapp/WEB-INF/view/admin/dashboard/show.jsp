@@ -177,7 +177,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Posts Management Section -->
         <div id="posts" class="content-section" style="display: none;">
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -303,4 +302,67 @@
                             <td>#5832</td>
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <img src="https://ui-avatars.com/api/?name=Nguyen+Van
+                                    <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A" class="user-avatar" alt="User">
+                                    <span>Nguyễn Văn A</span>
+                                </div>
+                            </td>
+                            <td>nguyenvana@gmail.com</td>
+                            <td>0901234567</td>
+                            <td>15</td>
+                            <td>2024-06-15</td>
+                            <td><span class="badge bg-success">Hoạt động</span></td>
+                            <td class="table-actions">
+                                <button class="btn btn-sm btn-info" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn btn-sm btn-warning" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-danger" title="Khóa tài khoản"><i class="fas fa-ban"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#5831</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="https://ui-avatars.com/api/?name=Tran+Thi+B" class="user-avatar" alt="User">
+                                    <span>Trần Thị B</span>
+                                </div>
+                            </td>
+                            <td>tranthib@example.com</td>
+                            <td>0987654321</td>
+                            <td>7</td>
+                            <td>2024-07-02</td>
+                            <td><span class="badge bg-warning text-dark">Tạm khóa</span></td>
+                            <td class="table-actions">
+                                <button class="btn btn-sm btn-info" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn btn-sm btn-success" title="Mở khóa"><i class="fas fa-unlock"></i></button>
+                                <button class="btn btn-sm btn-danger" title="Xóa tài khoản"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#5830</td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="https://ui-avatars.com/api/?name=Le+Van+C" class="user-avatar" alt="User">
+                                    <span>Lê Văn C</span>
+                                </div>
+                            </td>
+                            <td>levanc@example.com</td>
+                            <td>0911222333</td>
+                            <td>22</td>
+                            <td>2024-08-10</td>
+                            <td><span class="badge bg-success">Hoạt động</span></td>
+                            <td class="table-actions">
+                                <button class="btn btn-sm btn-info" title="Xem chi tiết"><i class="fas fa-eye"></i></button>
+                                <button class="btn btn-sm btn-warning" title="Chỉnh sửa"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-danger" title="Khóa tài khoản"><i class="fas fa-ban"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end content-wrapper -->
+</div> <!-- end main-content -->
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
