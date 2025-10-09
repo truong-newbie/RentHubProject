@@ -26,7 +26,7 @@ public class User {
     private String phoneNumber;
     private String password;
     private String address;
-    private LocalDateTime createdAt;
+    private String avatar;
 
     @OneToMany(mappedBy = "user")
     private List<Otp> otpList;
@@ -40,7 +40,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name="role_id")
     private Role role;
 }

@@ -19,7 +19,7 @@
         <div class="container-fluid p-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4><i class="fas fa-users me-2"></i> Quản Lý Người Dùng</h4>
-                <button class="btn btn-primary"><i class="fas fa-plus me-1"></i> Thêm mới</button>
+                <a href="/admin/user/create" class="btn btn-primary"><i class="fas fa-plus me-1"></i> Thêm mới</a>
             </div>
 
             <table class="table table-bordered table-hover bg-white">
