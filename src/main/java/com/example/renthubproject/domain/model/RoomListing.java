@@ -6,7 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.print.attribute.standard.Media;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,11 +26,21 @@ public class RoomListing {
     private String description;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
-    private String status;
-    private String category;
-    private double price;
+
+    @Enumerated(EnumType.STRING)
+    private PostStatus status;
+
+    @Enumerated(EnumType.STRING)
+    private RentalType rentalType;
+
+    private BigDecimal price;
     private String address;
     private long  views_count;
+
+    @ElementCollection
+    @CollectionTable(name = "room_images", joinColumns = @JoinColumn(name = "room_id"))
+    @Column(name = "image_path")
+    private List<String> images;
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -38,4 +51,5 @@ public class RoomListing {
 
     @OneToMany(mappedBy = "roomListing")
     private List<Review> reviews;
+
 }
