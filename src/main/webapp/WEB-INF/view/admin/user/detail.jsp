@@ -41,9 +41,6 @@
                 </table>
 
                 <div class="d-flex justify-content-end mt-3">
-                    <a href="/admin/user/edit/${user.id}" class="btn btn-warning me-2">
-                        <i class="fas fa-pen"></i> Sửa
-                    </a>
                     <a href="/admin/user" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i> Quay lại
                     </a>
