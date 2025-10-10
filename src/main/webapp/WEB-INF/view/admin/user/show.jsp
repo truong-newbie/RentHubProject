@@ -25,7 +25,7 @@
             <table class="table table-bordered table-hover bg-white">
                 <thead class="table-primary">
                 <tr>
-                    <th>#</th>
+                    <th>Id</th>
                     <th>Tên người dùng</th>
                     <th>Email</th>
                     <th>Vai trò</th>
@@ -34,17 +34,39 @@
                 </tr>
                 </thead>
                 <tbody>
+                    <c:forEach items="${users}" var="user">
                 <tr>
-                    <td>1</td>
-                    <td>Admin</td>
-                    <td>admin@gmail.com</td>
-                    <td><span class="badge bg-danger">Admin</span></td>
-                    <td>01/10/2025</td>
+                    <td>${user.id}</td>
+                    <td>${user.fullName}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role.name}</td>
+                    <td>${user.createdAt}</td>
                     <td>
-                        <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                        <!-- Nút xem chi tiết -->
+                        <a href="/admin/user/detail/${user.id}" class="btn btn-success btn-sm">
+                            <i class="fas fa-eye"></i>
+                        </a>
+
+                        <!-- Nút sửa -->
+                        <a href="/admin/user/update/${user.id}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-pen"></i>
+                        </a>
+
+                        <!-- Nút xóa -->
+                        <a href="/admin/user/delete/${user.id}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                        </a>
+<%--                        <form action="/admin/user/delete/${user.id}" method="post" style="display:inline;">--%>
+<%--                            <button type="submit" class="btn btn-danger btn-sm"--%>
+<%--                                    onclick="return confirm('Bạn có chắc muốn xóa người dùng này không?')">--%>
+<%--                                <i class="fas fa-trash"></i>--%>
+<%--                            </button>--%>
+<%--                        </form>--%>
+
                     </td>
                 </tr>
+                </c:forEach>
+
                 </tbody>
             </table>
         </div>
