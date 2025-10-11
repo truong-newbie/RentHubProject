@@ -4,6 +4,8 @@ import com.example.renthubproject.domain.model.RoomListing;
 import com.example.renthubproject.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostService {
     private final PostRepository postRepository;
@@ -12,5 +14,9 @@ public class PostService {
     }
     public void handleSavePost(RoomListing post){
         this.postRepository.save(post);
+    }
+
+    public List<RoomListing> getAllPosts(){
+        return this.postRepository.findAll();
     }
 }

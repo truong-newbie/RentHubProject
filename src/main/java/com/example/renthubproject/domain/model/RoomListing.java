@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.print.attribute.standard.Media;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -24,8 +24,6 @@ public class RoomListing {
     private long id;
     private String title;
     private String description;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
 
     @Enumerated(EnumType.STRING)
     private PostStatus status;
@@ -36,6 +34,12 @@ public class RoomListing {
     private BigDecimal price;
     private String address;
     private long  views_count;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     @ElementCollection
     @CollectionTable(name = "room_images", joinColumns = @JoinColumn(name = "room_id"))
@@ -51,5 +55,9 @@ public class RoomListing {
 
     @OneToMany(mappedBy = "roomListing")
     private List<Review> reviews;
+
+    public String getCreatedAtFormatted() {
+        return createdAt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
 
 }

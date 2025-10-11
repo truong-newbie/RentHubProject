@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -26,7 +28,7 @@
             <table class="table table-bordered table-hover bg-white">
                 <thead class="table-primary text-center">
                 <tr>
-                    <th>#</th>
+                    <th>Id</th>
                     <th>Tiêu đề</th>
                     <th>Người đăng</th>
                     <th>Ngày đăng</th>
@@ -35,18 +37,20 @@
                 </tr>
                 </thead>
                 <tbody class="align-middle text-center">
-                <tr>
-                    <td>1</td>
-                    <td>Phòng trọ quận 1, giá rẻ</td>
-                    <td>Nguyễn Văn A</td>
-                    <td>08/10/2025</td>
-                    <td><span class="badge bg-success">Đã duyệt</span></td>
-                    <td>
-                        <a href="/admin/post/detail/1" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="/admin/post/hide/1" class="btn btn-sm btn-warning"><i class="fas fa-eye-slash"></i></a>
-                        <a href="/admin/post/delete/1" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
+                <c:forEach var="post" items="${posts}">
+                    <tr>
+                        <td>${post.id}</td>
+                        <td>${post.title}</td>
+                        <td>${post.user.fullName}</td>
+                        <td>${post.createdAtFormatted}</td>
+                        <td><span class="badge bg-success">${post.status}</span></td>
+                        <td>
+                            <a href="/admin/post/detail/${post.id}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                            <a href="/admin/post/hide/${post.id}" class="btn btn-sm btn-warning"><i class="fas fa-eye-slash"></i></a>
+                            <a href="/admin/post/delete/${post.id}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

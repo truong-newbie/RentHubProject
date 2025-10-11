@@ -7,6 +7,7 @@ import com.example.renthubproject.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -48,6 +49,13 @@ public class UserService {
 
     public void handleDeleteUser(long id){
         this.userRepository.deleteById(id);
+    }
+
+    public User findByEmail(String email) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        return optionalUser.orElseThrow(() ->
+                new RuntimeException("User not found with email: " + email)
+        );
     }
 
 }
