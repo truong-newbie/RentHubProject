@@ -16,15 +16,12 @@
     <div class="container p-4 text-center">
         <div class="card p-4 shadow-sm">
             <h4 class="text-danger mb-4"><i class="fas fa-trash"></i> Xóa bài viết</h4>
-            <p>Bạn có chắc muốn xóa bài viết <strong>“Phòng trọ quận 1, giá rẻ”</strong> không?</p>
+            <p>Bạn có chắc muốn xóa bài viết này không?</p>
 
             <form action="/admin/post/delete/1" method="post" class="d-inline">
                 <button type="submit" class="btn btn-danger me-2"><i class="fas fa-trash"></i> Xóa</button>
             </form>
 
-            <a href="/admin/post" class="btn btn-secondary" style="display:inline-block;width:auto;">
-                <i class="fas fa-times"></i> Hủy
-            </a>
         </div>
     </div>
 </div>

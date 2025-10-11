@@ -1,4 +1,5 @@
 package com.example.renthubproject.controller.admin;
+import com.example.renthubproject.domain.model.PostStatus;
 import com.example.renthubproject.domain.model.RoomListing;
 import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.service.PostService;
@@ -58,18 +59,23 @@ public class PostController {
     }
 
     @GetMapping("/admin/post/detail/{id}")
-    public String showDetail(@PathVariable Long id) {
+    public String showDetail(@PathVariable Long id, Model model) {
+        RoomListing post= this.postService.getPostById(id);
+        model.addAttribute("post", post);
         return "admin/post/detail";
     }
 
     @GetMapping("/admin/post/hide/{id}")
     public String confirmHide(@PathVariable Long id) {
+
         return "admin/post/hide";
     }
 
     @PostMapping("/admin/post/hide/{id}")
     public String hidePost(@PathVariable Long id) {
-        // Gọi service cập nhật trạng thái bài viết sang HIDDEN
+        RoomListing post= this.postService.getPostById(id);
+        post.setStatus(PostStatus.HIDDEN);
+        this.postService.handleSavePost(post);
         return "redirect:/admin/post";
     }
 
@@ -80,7 +86,7 @@ public class PostController {
 
     @PostMapping("/admin/post/delete/{id}")
     public String deletePost(@PathVariable Long id) {
-        // Gọi service xóa bài viết thật
+        this.postService.handleDeletePost(id);
         return "redirect:/admin/post";
     }
 }

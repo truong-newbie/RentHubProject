@@ -19,4 +19,13 @@ public class PostService {
     public List<RoomListing> getAllPosts(){
         return this.postRepository.findAll();
     }
+
+    public RoomListing getPostById(long id){
+        return this.postRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Không tìm thấy roomListing với id = " + id) );
+    }
+
+    public void handleDeletePost(long id){
+        this.postRepository.deleteById(id);
+    }
 }

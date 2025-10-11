@@ -17,11 +17,14 @@
         <div class="card p-4 shadow-sm">
             <h4><i class="fas fa-eye text-primary"></i> Chi tiết bài đăng</h4>
             <hr>
-            <p><strong>Tiêu đề:</strong> Phòng trọ quận 1, giá rẻ</p>
-            <p><strong>Người đăng:</strong> Nguyễn Văn A</p>
-            <p><strong>Ngày đăng:</strong> 08/10/2025</p>
-            <p><strong>Mô tả:</strong> Phòng trọ đầy đủ tiện nghi, gần trung tâm...</p>
-            <p><strong>Trạng thái:</strong> <span class="badge bg-success">Đã duyệt</span></p>
+            <p><strong>Tiêu đề:</strong> ${post.title}</p>
+            <p><strong>Người đăng:</strong> ${post.user.fullName}</p>
+            <p><strong>Giá cả :</strong> ${post.price}</p>
+            <p><strong>Địa chỉ :</strong> ${post.address}</p>
+            <p><strong>Ngày đăng:</strong> ${post.createdAtFormatted}</p>
+            <p><strong>Mô tả:</strong> ${post.description}</p>
+            <p><strong>Trạng thái:</strong> <span class="badge bg-success">${post.status}</span></p>
+            <p><strong>Loại hình :</strong> ${post.rentalType}</p>
 
             <a href="/admin/post" class="btn btn-secondary mt-3">
                 <i class="fas fa-arrow-left"></i> Quay lại
