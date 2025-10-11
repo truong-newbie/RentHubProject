@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -19,6 +20,25 @@
             <hr>
             <p><strong>Tiêu đề:</strong> ${post.title}</p>
             <p><strong>Người đăng:</strong> ${post.user.fullName}</p>
+            <p><strong>Ảnh minh họa:</strong> </p>
+
+            <c:choose>
+                <c:when test="${not empty post.images}">
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <c:forEach var="img" items="${post.images}">
+                            <img src="${pageContext.request.contextPath}/images/roomImages/${img}"
+                                 alt="Ảnh phòng"
+                                 class="img-thumbnail"
+                                 style="width: 120px; height: 120px; object-fit: cover;">
+                        </c:forEach>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <img src="${pageContext.request.contextPath}/images/roomImages/default_roomImage.png" alt="Default roomImage" width="100" height="100">
+                </c:otherwise>
+            </c:choose>
+
+
             <p><strong>Giá cả :</strong> ${post.price}</p>
             <p><strong>Địa chỉ :</strong> ${post.address}</p>
             <p><strong>Ngày đăng:</strong> ${post.createdAtFormatted}</p>

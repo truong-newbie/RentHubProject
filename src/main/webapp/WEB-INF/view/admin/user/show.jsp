@@ -34,9 +34,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${users}" var="user">
+                    <c:forEach items="${users}" var="user" varStatus="loop">
                 <tr>
-                    <td>${user.id}</td>
+                    <td>${loop.index + 1}</td>
                     <td>${user.fullName}</td>
                     <td>${user.email}</td>
                     <td>${user.role.name}</td>
@@ -56,13 +56,6 @@
                         <a href="/admin/user/delete/${user.id}" class="btn btn-danger btn-sm">
                             <i class="fas fa-trash"></i>
                         </a>
-<%--                        <form action="/admin/user/delete/${user.id}" method="post" style="display:inline;">--%>
-<%--                            <button type="submit" class="btn btn-danger btn-sm"--%>
-<%--                                    onclick="return confirm('Bạn có chắc muốn xóa người dùng này không?')">--%>
-<%--                                <i class="fas fa-trash"></i>--%>
-<%--                            </button>--%>
-<%--                        </form>--%>
-
                     </td>
                 </tr>
                 </c:forEach>

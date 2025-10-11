@@ -1,7 +1,6 @@
 package com.example.renthubproject.controller.admin;
 import com.example.renthubproject.domain.model.PostStatus;
 import com.example.renthubproject.domain.model.RoomListing;
-import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.service.PostService;
 import com.example.renthubproject.service.UploadService;
 import com.example.renthubproject.service.UserService;

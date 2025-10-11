@@ -20,13 +20,12 @@
         <div class="container-fluid p-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4><i class="fas fa-clock me-2"></i> Tin Chờ Duyệt</h4>
-                <button class="btn btn-primary"><i class="fas fa-plus me-1"></i> Thêm mới</button>
             </div>
 
             <table class="table table-bordered table-hover bg-white">
                 <thead class="table-primary">
                 <tr>
-                    <th>#</th>
+                    <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Người đăng</th>
                     <th>Ngày gửi</th>
@@ -34,16 +33,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Phòng trọ quận 9, gần ĐH SPKT</td>
-                    <td>Trần Thị B</td>
-                    <td>07/10/2025</td>
-                    <td>
-                        <button class="btn btn-sm btn-success"><i class="fas fa-check"></i></button>
-                        <button class="btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
-                    </td>
-                </tr>
+                <c:forEach var="pendingPost" items="${pendingPosts}" varStatus="loop">
+                    <tr>
+                        <td>${loop.index + 1}</td>
+                        <td>${pendingPost.title}</td>
+                        <td>${pendingPost.user.fullName}</td>
+                        <td>${pendingPost.createdAtFormatted}</td>
+                        <td>
+                            <a href="/admin/post/detail/${pendingPost.id}" class="btn btn-sm btn-info me-1">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="/admin/pendingpost/approve/${pendingPost.id}" class="btn btn-sm btn-success me-1">
+                                <i class="fas fa-check"></i>
+                            </a>
+                            <a href="/admin/pendingpost/reject/${pendingPost.id}" class="btn btn-sm btn-danger">
+                            <i class="fas fa-times"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
+
                 </tbody>
             </table>
         </div>

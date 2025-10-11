@@ -1,9 +1,11 @@
 package com.example.renthubproject.service;
 
+import com.example.renthubproject.domain.model.PostStatus;
 import com.example.renthubproject.domain.model.RoomListing;
 import com.example.renthubproject.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,5 +29,16 @@ public class PostService {
 
     public void handleDeletePost(long id){
         this.postRepository.deleteById(id);
+    }
+
+    public List<RoomListing> getAllPendingPost(){
+        List<RoomListing> pendingPost= new ArrayList<>();
+        List<RoomListing> allPost=this.postRepository.findAll();
+        for(RoomListing room : allPost){
+            if(room.getStatus() == PostStatus.PENDING ){
+                pendingPost.add(room);
+            }
+        }
+        return pendingPost;
     }
 }

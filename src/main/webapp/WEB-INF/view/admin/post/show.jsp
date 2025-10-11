@@ -37,9 +37,9 @@
                 </tr>
                 </thead>
                 <tbody class="align-middle text-center">
-                <c:forEach var="post" items="${posts}">
+                <c:forEach var="post" items="${posts}" varStatus="loop">
                     <tr>
-                        <td>${post.id}</td>
+                        <td>${loop.index + 1}</td>
                         <td>${post.title}</td>
                         <td>${post.user.fullName}</td>
                         <td>${post.createdAtFormatted}</td>
