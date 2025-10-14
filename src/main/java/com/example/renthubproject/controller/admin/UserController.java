@@ -4,8 +4,10 @@ import com.example.renthubproject.domain.model.Role;
 import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.service.UploadService;
 import com.example.renthubproject.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,8 +42,15 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String handleCreateUser(Model model,@ModelAttribute("newUser") User user,
+    public String handleCreateUser(Model model,@ModelAttribute("newUser") @Valid User user,
+                        BindingResult bindingResult,
                         @RequestParam("TruongFile") MultipartFile file){
+
+        //validate
+        if(bindingResult.hasErrors()){
+            return "admin/user/create";
+        }
+
         String avatar= this.uploadService.handleSaveUploadFile(file,"avatar");
         user.setAvatar(avatar);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -67,11 +76,18 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update/{id}")
-    public String updateUser(@PathVariable long id,@ModelAttribute("user") User updateUser,
+    public String updateUser(Model model,@PathVariable long id,@ModelAttribute("updateUser") @Valid User updateUser,
+    BindingResult bindingResult,
     @RequestParam("TruongFile") MultipartFile file){
+        System.out.println(0);
+        if (bindingResult.hasErrors()) {
+        return "admin/user/update";
+        }
+        System.out.println(1);
         String avatar= this.uploadService.handleSaveUploadFile(file,"avatar");
         updateUser.setAvatar(avatar);
         this.userService.handleUpdateUser(id,updateUser);
+        System.out.println(2);
         return "redirect:/admin/user";
     }
 

@@ -1,12 +1,16 @@
 package com.example.renthubproject.domain.model;
 
+import com.example.renthubproject.service.validate.StrongPassword;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,10 +26,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "This field cannot be blank.")
+    @Size(min=3, message = "Tên phải có tối thiểu 3 ký tự")
     private String fullName;
+
+    @NotBlank(message = "This field cannot be blank.")
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
-    private String phoneNumber;
+
+    @StrongPassword
     private String password;
+
+    private String phoneNumber;
+
     private String address;
     private String avatar;
 

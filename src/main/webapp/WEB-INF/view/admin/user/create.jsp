@@ -44,19 +44,31 @@
                     modelAttribute="newUser">
                         <div class="row mb-3">
                             <div class="col-md-6">
+                                <c:set var="errorEmail">
+                                    <form:errors path="email" cssClass="invalid-feedback"/>
+                                </c:set>
                                 <label class="form-label">Email</label>
-                                <form:input type="email" class="form-control" path="email" />
+                                <form:input type="email" class="form-control ${not empty errorEmail ? 'is-invalid' :'' }" path="email"/>
+                                    ${errorEmail}
                             </div>
                             <div class="col-md-6">
+                                <c:set var="errorPassword">
+                                    <form:errors path="password" cssClass="invalid-feedback"/>
+                                </c:set>
                                 <label class="form-label">Mật khẩu</label>
-                                <form:input type="password" class="form-control" path="password" />
+                                <form:input type="password" class="form-control ${not empty errorPassword ? 'is-invalid' : ''}" path="password"/>
+                                    ${errorPassword}
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
+                                <c:set var="errorFullName">
+                                    <form:errors path="fullName" cssClass="invalid-feedback"/>
+                                </c:set>
                                 <label class="form-label">Họ tên</label>
-                                <form:input type="text" class="form-control" path="fullName" />
+                                <form:input type="fullName" class="form-control ${not empty errorFullName ? 'is-invalid' :'' }" path="fullName"/>
+                                    ${errorFullName}
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Số điện thoại</label>
