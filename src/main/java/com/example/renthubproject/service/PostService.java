@@ -1,10 +1,10 @@
 package com.example.renthubproject.service;
 
 import com.example.renthubproject.domain.model.PostStatus;
+import com.example.renthubproject.domain.model.RentalType;
 import com.example.renthubproject.domain.model.RoomListing;
 import com.example.renthubproject.repository.PostRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,5 +40,15 @@ public class PostService {
             }
         }
         return pendingPost;
+    }
+
+    public List<RoomListing> getAllPostRentalRoom(){
+        return this.postRepository.findByRentalType(RentalType.PHONG_TRO);
+    }
+    public List<RoomListing> getAllPostEntireHouse(){
+        return this.postRepository.findByRentalType(RentalType.NHA_NGUYEN_CAN);
+    }
+    public List<RoomListing> getAllPostFlat(){
+        return this.postRepository.findByRentalType(RentalType.CAN_HO);
     }
 }

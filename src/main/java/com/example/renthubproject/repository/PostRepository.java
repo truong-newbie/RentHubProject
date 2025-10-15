@@ -1,6 +1,7 @@
 package com.example.renthubproject.repository;
 
 import com.example.renthubproject.domain.model.PostStatus;
+import com.example.renthubproject.domain.model.RentalType;
 import com.example.renthubproject.domain.model.RoomListing;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -9,4 +10,5 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<RoomListing,Long> {
+    List<RoomListing> findByRentalType(RentalType rentalType);
 }

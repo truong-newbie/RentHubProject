@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -19,36 +21,27 @@
 <section class="container">
     <h2 class="section-title">LỰA CHỌN CHO Ở HOT</h2>
     <div class="row g-3">
-        <%
-            // Sample data for properties
-            String[][] properties = {
-                    {"Nhà Trọ Hèm 93 Trần Quang Diệu, Tả Ơn , Tính Bình Dương", "1,5", "Nhà trọ, phòng trọ", "Di An , Tính Bình Dương", "https://via.placeholder.com/300x200/e0e0e0/999?text=Phòng+trọ+1"},
-                    {"Nhà trọ 23 Đức Diễn, Phúc Diễn, Bắc Từ Liêm , Thành phố Hà Nội", "2,4", "Nhà trọ, phòng trọ", "Bắc Từ Liêm , Thành phố Hà Nội", "https://via.placeholder.com/300x200/e0e0e0/999?text=Phòng+trọ+2"},
-                    {"Nhà trọ 273 Trần Cung , Có Nhuẹ 1, Bắc Từ Liêm , Thành phố Hà Nội", "4,25", "Nhà trọ, phòng trọ", "Bắc Từ Liêm , Thành phố Hà Nội", "https://via.placeholder.com/300x200/e0e0e0/999?text=Phòng+trọ+3"},
-                    {"Mặt Bằng Số 379 Lê Thị Riêng , Thới An , Quận 12 , Thành phố Hồ Chí Minh", "13", "Nhà nguyên căn", "Quận 12 , Thành phố Hồ Chí Minh", "https://via.placeholder.com/300x200/e0e0e0/999?text=Nhà+nguyên+căn"}
-            };
-
-            for(String[] prop : properties) {
-        %>
-        <div class="col-lg-3 col-md-6">
-            <div class="property-card">
-                <div class="property-img">
-                    <img src="<%= prop[4] %>" alt="<%= prop[0] %>">
-                    <span class="hot-badge">HOT</span>
-                    <button class="heart-btn"><i class="far fa-heart"></i></button>
-                </div>
-                <div class="property-info">
-                    <div class="property-price">Từ <%= prop[1] %> triệu/tháng</div>
-                    <div class="property-title"><%= prop[0] %></div>
-                    <div class="property-type"><%= prop[2] %></div>
-                    <div class="property-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <%= prop[3] %>
+        <c:forEach var="post" items="${posts}">
+            <div class="col-lg-3 col-md-6">
+                <div class="property-card">
+                    <div class="property-img">
+                        <img src="${pageContext.request.contextPath}/resources/images/roomImages/${post.images[0]}" alt="${post.title}">
+                        <span class="hot-badge">HOT</span>
+                        <button class="heart-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="property-info">
+                        <div class="property-price">Từ ${post.price} triệu/tháng</div>
+                        <div class="property-title">${post.title}</div>
+                        <div class="property-type">${post.rentalType}</div>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                                ${post.address}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <% } %>
+        </c:forEach>
+
     </div>
 </section>
 
