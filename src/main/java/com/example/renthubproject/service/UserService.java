@@ -26,6 +26,12 @@ public class UserService {
         return this.roleRepository.findByName(name);
     }
 
+    public Role getRoleById(Long id){
+        return this.roleRepository.findById(id).orElseThrow( ()->
+                new RuntimeException("User not found with role:" )
+                );
+    }
+
     public List<User> getAllUsers(){
         return this.userRepository.findAll();
     }

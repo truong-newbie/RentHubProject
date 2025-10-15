@@ -83,11 +83,17 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Vai trò</label>
-                                <form:select class="form-select"  path="role.name">
+<%--                                <form:select class="form-select"  path="role.name">--%>
+<%--                                    <form:option value="">-- Chọn vai trò --</form:option>--%>
+<%--                                    <form:option value="ADMIN">Admin</form:option>--%>
+<%--                                    <form:option value="USER">Người dùng</form:option>--%>
+<%--                                    <form:option value="LANDLORD">Người cho thuê</form:option>--%>
+<%--                                </form:select>--%>
+                                <form:select class="form-select"  path="role">
                                     <form:option value="">-- Chọn vai trò --</form:option>
-                                    <form:option value="ADMIN">Admin</form:option>
-                                    <form:option value="USER">Người dùng</form:option>
-                                    <form:option value="LANDLORD">Người cho thuê</form:option>
+                                    <form:option value="1">Người cho thuê</form:option>
+                                    <form:option value="2">Người thuê phòng</form:option>
+                                    <form:option value="3">Admin</form:option>
                                 </form:select>
                             </div>
                         </div>

@@ -34,7 +34,7 @@ public class User {
     @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
-    @StrongPassword
+//    @StrongPassword
     private String password;
 
     private String phoneNumber;
