@@ -1,18 +1,28 @@
 package com.example.renthubproject.controller.client;
 
+import com.example.renthubproject.domain.dto.RegisterDTO;
 import com.example.renthubproject.domain.model.RoomListing;
+import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.service.PostService;
+import com.example.renthubproject.service.UserService;
+import jakarta.validation.Valid;
+import org.hibernate.sql.results.graph.collection.internal.BagInitializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
 @Controller
 public class HomepageController {
     private final PostService postService;
-    public HomepageController(PostService postService) {
+    private final UserService userService;
+    public HomepageController(PostService postService , UserService userService) {
         this.postService = postService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -41,5 +51,27 @@ public class HomepageController {
         List<RoomListing> flats= this.postService.getAllPostFlat();
         model.addAttribute("flats",flats );
         return "client/homepage/flat";
+    }
+
+    @GetMapping("/login")
+    public String getLogin(Model model) {
+        return "client/auth/login";
+    }
+
+    @GetMapping("/register")
+    public String getRegister(Model model){
+        model.addAttribute("registerUser", new RegisterDTO());
+        return "client/auth/register";
+    }
+
+    @PostMapping("/register")
+    public String handleRegister(@ModelAttribute("registerUser") @Valid RegisterDTO registerDTO,
+                                 BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "client/auth/register";
+        }
+        User user= this.userService.RegisterDTOtoUser(registerDTO);
+        this.userService.handleSaveUser(user);
+        return "redirect:/login";
     }
 }

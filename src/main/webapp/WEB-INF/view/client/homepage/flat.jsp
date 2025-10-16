@@ -78,7 +78,7 @@
 
 <!-- Main Content -->
 <div class="container content-wrapper">
-    <h1 class="page-title">CHO THUÊ NHÀ TRỌ, PHÒNG TRỌ GIÁ RẺ, MỚI NHẤT</h1>
+    <h1 class="page-title">CHO THUÊ CĂN HỘ GIÁ RẺ, MỚI NHẤT</h1>
 
     <div class="row">
         <!-- Filter Sidebar -->

@@ -2,6 +2,6 @@
 <!-- Footer -->
 <footer>
     <div class="container">
-        <p>&copy; 2025 Trợ Mối - Tìm Nhà Trọ Toàn Quốc. All rights reserved.</p>
+        <p>&copy; 2025 NhaTro247 - Tìm Nhà Trọ Toàn Quốc. All rights reserved.</p>
     </div>
 </footer>

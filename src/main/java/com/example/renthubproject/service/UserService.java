@@ -1,9 +1,11 @@
 package com.example.renthubproject.service;
 
+import com.example.renthubproject.domain.dto.RegisterDTO;
 import com.example.renthubproject.domain.model.Role;
 import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.repository.RoleRepository;
 import com.example.renthubproject.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +15,11 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    public UserService(UserRepository userRepository,RoleRepository roleRepository) {
+    private final PasswordEncoder passwordEncoder;
+    public UserService(UserRepository userRepository,RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void handleSaveUser(User user){
@@ -62,6 +66,23 @@ public class UserService {
         return optionalUser.orElseThrow(() ->
                 new RuntimeException("User not found with email: " + email)
         );
+    }
+
+    public User RegisterDTOtoUser(RegisterDTO registerDTO) {
+        User user=new User();
+        Optional<Role> role= this.roleRepository.findById(registerDTO.getRole_id());
+        if(role.isEmpty()){
+            throw new IllegalArgumentException("Không tìm thấy vai trò với ID: " + registerDTO.getRole_id());
+        }
+        user.setFullName(registerDTO.getFullName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+        user.setRole(role.get());
+        return user;
+    }
+
+    public boolean checkEmailExist(String email){
+        return this.userRepository.existsByEmail(email);
     }
 
 }

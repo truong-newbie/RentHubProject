@@ -40,7 +40,7 @@
                     <td>${user.fullName}</td>
                     <td>${user.email}</td>
                     <td>${user.role.name}</td>
-                    <td>${user.createdAt}</td>
+                    <td>${user.createdAtFormatted}</td>
                     <td>
                         <!-- Nút xem chi tiết -->
                         <a href="/admin/user/detail/${user.id}" class="btn btn-success btn-sm">

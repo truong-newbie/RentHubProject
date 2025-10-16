@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="hero-content">
-                    <h1>TÌM NHANH, KIẾM DỀ TRỢ MỐI TOÀN QUỐC</h1>
+                    <h1>TÌM NHANH, TÌM KIẾM TRỌ TOÀN QUỐC</h1>
                     <p>Trang thông tin và cho thuê phòng trọ nhanh chóng, hiệu quả với hơn 500 tin đăng mới và 30.000 lượt xem mỗi ngày</p>
                 </div>
             </div>
