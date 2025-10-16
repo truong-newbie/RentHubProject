@@ -14,6 +14,11 @@ import java.util.List;
 
 
 @Entity
+@Table(indexes = {
+    @Index(name = "idx_room_title", columnList = "title"),
+    @Index(name = "idx_room_address", columnList = "address"),
+    @Index(name = "idx_room_price", columnList = "price")
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,6 +38,8 @@ public class RoomListing {
 
     private BigDecimal price;
     private String address;
+    private Double latitude;
+    private Double longitude;
     private long  views_count;
 
     @CreationTimestamp

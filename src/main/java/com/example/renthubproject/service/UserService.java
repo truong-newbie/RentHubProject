@@ -64,4 +64,17 @@ public class UserService {
         );
     }
 
+    public boolean hasFreeQuota(User user){
+        if(user.getFreePostQuota() == null) return false;
+        return user.getFreePostQuota() > 0;
+    }
+
+    public void consumeFreeQuota(User user){
+        if(user.getFreePostQuota() == null) user.setFreePostQuota(0);
+        if(user.getFreePostQuota() > 0){
+            user.setFreePostQuota(user.getFreePostQuota() - 1);
+            this.userRepository.save(user);
+        }
+    }
+
 }

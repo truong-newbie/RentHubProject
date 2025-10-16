@@ -20,7 +20,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="users")
+@Table(name="users", indexes = {
+    @Index(name = "idx_users_email_jpa", columnList = "email")
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +43,7 @@ public class User {
 
     private String address;
     private String avatar;
+    private Integer freePostQuota = 3; // default free posts quota
 
     @CreationTimestamp
     private LocalDateTime createdAt;
