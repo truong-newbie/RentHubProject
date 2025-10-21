@@ -61,12 +61,12 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
-    public User findByEmail(String email) {
-        Optional<User> optionalUser = userRepository.findByEmail(email);
-        return optionalUser.orElseThrow(() ->
-                new RuntimeException("User not found with email: " + email)
-        );
-    }
+//    public User findByEmail(String email) {
+//        Optional<User> optionalUser = userRepository.findByEmail(email);
+//        return optionalUser.orElseThrow(() ->
+//                new RuntimeException("User not found with email: " + email)
+//        );
+//    }
 
     public User RegisterDTOtoUser(RegisterDTO registerDTO) {
         User user=new User();
@@ -83,6 +83,10 @@ public class UserService {
 
     public boolean checkEmailExist(String email){
         return this.userRepository.existsByEmail(email);
+    }
+
+    public User getUserByEmail(String email){
+        return this.userRepository.findByEmail(email);
     }
 
 }

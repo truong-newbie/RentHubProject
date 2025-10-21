@@ -23,6 +23,9 @@
         </c:if>
 
         <form action="${pageContext.request.contextPath}/login" method="post">
+            <c:if test="${param.error != null}">
+                <div class="my-2" style="color: red;">Invalid email or password.</div>
+            </c:if>
             <div class="mb-3">
                 <label for="email" class="form-label">Tên đăng nhập</label>
                 <input type="email" class="form-control" id="email" name="email"
@@ -34,8 +37,11 @@
                 <input type="password" class="form-control" id="password" name="password"
                        placeholder="Nhập mật khẩu" required>
             </div>
+            <div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </div>
 
-            <!-- ✅ Nút Remember Me -->
+            <!--  Nút Remember Me -->
             <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" id="rememberMe" name="remember-me">
                 <label class="form-check-label" for="rememberMe">Ghi nhớ đăng nhập</label>
