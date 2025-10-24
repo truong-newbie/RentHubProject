@@ -61,13 +61,6 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
-//    public User findByEmail(String email) {
-//        Optional<User> optionalUser = userRepository.findByEmail(email);
-//        return optionalUser.orElseThrow(() ->
-//                new RuntimeException("User not found with email: " + email)
-//        );
-//    }
-
     public User RegisterDTOtoUser(RegisterDTO registerDTO) {
         User user=new User();
         Optional<Role> role= this.roleRepository.findById(registerDTO.getRole_id());

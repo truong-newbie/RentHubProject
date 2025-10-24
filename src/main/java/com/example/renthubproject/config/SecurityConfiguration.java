@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
@@ -24,6 +25,11 @@ public class SecurityConfiguration {
     @Bean
     public UserDetailsService userDetailsService(UserService userService) {
         return new CustomUserDetailsService(userService);
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler customSuccessHandler() {
+        return new CustomSuccessHandler();
     }
 
     @Bean
@@ -44,11 +50,13 @@ public class SecurityConfiguration {
                         .dispatcherTypeMatchers(DispatcherType.FORWARD,
                                 DispatcherType.INCLUDE).permitAll()
                         .requestMatchers("/", "/login", "/client/**", "/css/**","/register",
-                                "/images/**").permitAll()
+                                "/images/**","/rentalroom","/entirehouse","/flat").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login?error")
+                        .successHandler(customSuccessHandler())
                         .usernameParameter("email")     //  Khai báo Spring lấy field "email" thay vì "username"
                         .passwordParameter("password")  // Mặc định là "password"
                         .defaultSuccessUrl("/", true)   // Trang chuyển đến sau khi login thành công
