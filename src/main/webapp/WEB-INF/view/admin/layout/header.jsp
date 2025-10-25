@@ -15,7 +15,12 @@
             <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Hồ Sơ</a></li>
             <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Cài Đặt</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i> Đăng Xuất</a></li>
+            <li>
+                <form method="post" action="/logout">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button class="dropdown-item text-danger"> Đăng xuất</button>
+                </form>
+            </li>
         </ul>
     </div>
 </div>

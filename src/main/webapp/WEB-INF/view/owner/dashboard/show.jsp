@@ -66,10 +66,13 @@
                 <span>Chuyển sang tìm trọ</span>
             </a>
 
-            <a href="#" class="dropdown-item">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Đăng xuất</span>
-            </a>
+            <form method="post" action="/logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <button class="dropdown-item">
+                    <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                </button>
+
+            </form>
         </div>
     </div>
 

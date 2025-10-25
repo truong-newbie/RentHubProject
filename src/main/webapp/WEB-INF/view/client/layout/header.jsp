@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <link href="${pageContext.request.contextPath}/resources/css/owner/styles.css" rel="stylesheet" >
-
 <header class="navbar-custom">
     <div class="container position-relative">
         <div class="d-flex justify-content-between align-items-center">
@@ -18,7 +16,6 @@
                 <a href="/flat">Căn hộ</a>
             </nav>
 
-            <!-- Nếu đã đăng nhập -->
             <c:if test="${not empty pageContext.request.userPrincipal}">
                 <!-- Avatar -->
                 <div class="user-avatar" onclick="toggleDropdown(event)">
@@ -61,12 +58,16 @@
                         <a href="#" class="dropdown-item"><i class="bi bi-person-badge"></i> Thông tin cá nhân</a>
                         <a href="#" class="dropdown-item"><i class="bi bi-person-circle"></i> Thông tin tài khoản</a>
                         <a href="#" class="dropdown-item"><i class="bi bi-arrow-left-right"></i> Chuyển sang tìm trọ</a>
-                        <a href="#" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
+                        <form method="post" action="/logout">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <button class="dropdown-item">
+                                <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                            </button>
+                        </form>
                     </div>
                 </div>
             </c:if>
 
-            <!-- Nếu chưa đăng nhập -->
             <c:if test="${empty pageContext.request.userPrincipal}">
                 <div class="d-flex gap-2 align-items-center">
                     <a href="/login" class="nav-auth-link"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
