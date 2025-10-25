@@ -52,6 +52,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/", "/login", "/client/**","/resources/**", "/css/**","/register",
                                 "/images/**","/rentalroom","/entirehouse","/flat").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/owner/**").hasRole("OWNER")
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
@@ -59,8 +60,13 @@ public class SecurityConfiguration {
                         .successHandler(customSuccessHandler())
                         .usernameParameter("email")     //  Khai báo Spring lấy field "email" thay vì "username"
                         .passwordParameter("password")  // Mặc định là "password"
-//                        .defaultSuccessUrl("/", true)   // Trang chuyển đến sau khi login thành công
-                        .permitAll());
-                return http.build();
+                        .permitAll())
+                        .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"))
+                        .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+        );
+        return http.build();
     }
 }
