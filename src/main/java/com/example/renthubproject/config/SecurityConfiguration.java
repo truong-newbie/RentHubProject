@@ -49,7 +49,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD,
                                 DispatcherType.INCLUDE).permitAll()
-                        .requestMatchers("/", "/login", "/client/**", "/css/**","/register",
+                        .requestMatchers("/", "/login", "/client/**","/resources/**", "/css/**","/register",
                                 "/images/**","/rentalroom","/entirehouse","/flat").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
@@ -59,7 +59,7 @@ public class SecurityConfiguration {
                         .successHandler(customSuccessHandler())
                         .usernameParameter("email")     //  Khai báo Spring lấy field "email" thay vì "username"
                         .passwordParameter("password")  // Mặc định là "password"
-                        .defaultSuccessUrl("/", true)   // Trang chuyển đến sau khi login thành công
+//                        .defaultSuccessUrl("/", true)   // Trang chuyển đến sau khi login thành công
                         .permitAll());
                 return http.build();
     }
