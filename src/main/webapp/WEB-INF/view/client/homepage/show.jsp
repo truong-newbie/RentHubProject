@@ -25,7 +25,14 @@
             <div class="col-lg-3 col-md-6">
                 <div class="property-card">
                     <div class="property-img">
-                        <img src="${pageContext.request.contextPath}/resources/images/roomImages/${post.images[0]}" alt="${post.title}">
+                        <c:choose>
+                            <c:when test="${empty post.images}">
+                                <img src="${pageContext.request.contextPath}/resources/images/roomImages/default_roomImage.png" alt="Ảnh mặc định">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="${pageContext.request.contextPath}/resources/images/roomImages/${post.images[0]}" alt="${post.title}">
+                            </c:otherwise>
+                        </c:choose>
                         <span class="hot-badge">HOT</span>
                         <button class="heart-btn"><i class="far fa-heart"></i></button>
                     </div>

@@ -26,38 +26,27 @@
                 <div class="user-dropdown" id="userDropdown">
                     <div class="dropdown-header">
                         <div class="user-info">
-                            <div class="avatar">G</div>
+                            <div style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;">
+                                <c:choose>
+                                    <c:when test="${empty sessionScope.avatar}">
+                                        <img src="${pageContext.request.contextPath}/resources/images/avatar/default-avatar.jpg" alt="Ảnh mặc định">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${pageContext.request.contextPath}/resources/images/avatar/${sessionScope.avatar}" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+
                             <div>
-                                <div><strong>Garnacho Jr</strong></div>
-                                <div style="font-size: 12px; color: #999;">ID: #30094</div>
+                                <div><strong>${sessionScope.fullName}</strong></div>
                             </div>
                         </div>
 
-                        <div class="balance-info">
-                            <span class="balance-label">TK chính:</span>
-                            <span class="balance-amount">0đ</span>
-                        </div>
-
-                        <div class="balance-info">
-                            <span class="balance-label">TK khuyến mãi:</span>
-                            <span class="balance-amount">0đ</span>
-                        </div>
-
-                        <div class="balance-info">
-                            <span class="balance-label">Số lượng quảng cáo:</span>
-                            <span class="balance-amount">1/1</span>
-                        </div>
-
-                        <button class="dropdown-btn">
-                            <i class="bi bi-coin"></i>
-                            Nạp tiền
-                        </button>
                     </div>
 
                     <div class="dropdown-menu-items">
                         <a href="#" class="dropdown-item"><i class="bi bi-person-badge"></i> Thông tin cá nhân</a>
                         <a href="#" class="dropdown-item"><i class="bi bi-person-circle"></i> Thông tin tài khoản</a>
-                        <a href="#" class="dropdown-item"><i class="bi bi-arrow-left-right"></i> Chuyển sang tìm trọ</a>
                         <form method="post" action="/logout">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <button class="dropdown-item">

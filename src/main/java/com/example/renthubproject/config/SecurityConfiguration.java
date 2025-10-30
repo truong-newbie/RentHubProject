@@ -25,7 +25,8 @@ public class SecurityConfiguration {
         SpringSessionRememberMeServices rememberMeServices =
                 new SpringSessionRememberMeServices();
             // optionally customize
-        rememberMeServices.setAlwaysRemember(true);
+        rememberMeServices.setAlwaysRemember(true);  // mặc định luôn remember me dù người dùng có tích remember me hay không
+        // để false nếu luôn không
         return rememberMeServices;
     }
 
@@ -67,10 +68,10 @@ public class SecurityConfiguration {
                         .requestMatchers("/owner/**").hasRole("OWNER")
                         .anyRequest().authenticated())
                 .sessionManagement((sessionManagement) -> sessionManagement
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                        .invalidSessionUrl("/logout?expired")
-                        .maximumSessions(1)
-                        .maxSessionsPreventsLogin(false))
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)  // luôn tạo session ngay sau khi đăng nhập
+                        .invalidSessionUrl("/logout?expired")   // nếu session hết hạn thì chuyển đến url này
+                        .maximumSessions(1)  // mỗi tài khoản chỉ được đăng nhập trên 1 thiết bị
+                        .maxSessionsPreventsLogin(false))    //nếu đăng nhập trên thiết bị khác, session cũ bi hủy . đ true đăng nhâập mới sẽ bị chặn
                 .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
                 .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
                 .formLogin(formLogin -> formLogin
