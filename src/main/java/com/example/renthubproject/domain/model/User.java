@@ -58,6 +58,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
 
+    @NotNull(message = "Phải chọn quyền ")
     @ManyToOne()
     @JoinColumn(name="role_id")
     private Role role;

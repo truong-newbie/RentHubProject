@@ -29,8 +29,9 @@
     <div class="container p-4">
         <h4 class="mb-4"><i class="fas fa-user-edit me-2"></i> Cập nhật người dùng</h4>
 
-        <form:form action="/admin/user/update/${user.id}" method="post" enctype="multipart/form-data"
+        <form:form action="${pageContext.request.contextPath}/admin/user/update/${updateUser.id}" method="post" enctype="multipart/form-data"
               class="card p-4 shadow-sm" modelAttribute="updateUser">
+            <form:hidden path="id"/>
             <div class="mb-3 text-center">
                 <div class="col-12 mb-3">
                     <img style="max-height:250px ; display:none;" alt="avatar preview"
@@ -69,17 +70,21 @@
             <div class="mb-3">
                 <label>Địa chỉ</label>
                 <form:input type="text" class="form-control" name="address"  path="address"/>
+            </div>
                 <div class="mb-3">
+                    <c:set var="errorRole">
+                        <form:errors path="role" cssClass="invalid-feedback"/>
+                    </c:set>
                     <label>Vai trò</label>
-                    <form:select class="form-select"  path="role.name">
-                        <form:option value="">-- Chọn vai trò --</form:option>
-                        <form:option value="ADMIN">Admin</form:option>
-                        <form:option value="USER">Người dùng</form:option>
-                        <form:option value="LANDLORD">Người cho thuê</form:option>
+                    <form:select path="role.id" class="form-select ${not empty errorRole ? 'is-invalid' : ''}">
+                        <form:option value="1">Người cho thuê</form:option>
+                        <form:option value="2">Người thuê phòng</form:option>
+                        <form:option value="3">Admin</form:option>
                     </form:select>
+                        ${errorRole}
                 </div>
 
-                <div class="d-flex justify-content-end">
+                <div  class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary me-2"><i class="fas fa-save"></i> Lưu</button>
                     <a href="/admin/user" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Hủy</a>
                 </div>

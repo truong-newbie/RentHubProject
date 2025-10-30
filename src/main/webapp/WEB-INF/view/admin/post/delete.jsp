@@ -18,7 +18,8 @@
             <h4 class="text-danger mb-4"><i class="fas fa-trash"></i> Xóa bài viết</h4>
             <p>Bạn có chắc muốn xóa bài viết này không?</p>
 
-            <form action="/admin/post/delete/1" method="post" class="d-inline">
+            <form action="/admin/post/delete/${post.id}" method="post" class="d-inline">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button type="submit" class="btn btn-danger me-2"><i class="fas fa-trash"></i> Xóa</button>
             </form>
 

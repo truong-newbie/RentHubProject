@@ -52,8 +52,11 @@ public class UserService {
         existingUser.setEmail(updateUser.getEmail());
         existingUser.setPhoneNumber(updateUser.getPhoneNumber());
         existingUser.setAddress(updateUser.getAddress());
-        Role role= getRoleByName(updateUser.getRole().getName());
-        existingUser.setRole(role);
+        Optional<Role> role = this.roleRepository.findById((updateUser.getRole().getId()));
+        if(role.isEmpty()){
+            throw new RuntimeException("Không tìm thấy role cần tìm");
+        }
+        existingUser.setRole(role.get());
         this.userRepository.save(existingUser);
     }
 

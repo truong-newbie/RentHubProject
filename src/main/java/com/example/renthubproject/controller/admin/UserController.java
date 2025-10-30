@@ -70,8 +70,7 @@ public class UserController {
     @GetMapping("/admin/user/update/{id}")
     public String getUpdateUser(Model model, @PathVariable long id){
         User user= this.userService.getUserById(id);
-        model.addAttribute("user", user);
-        model.addAttribute("updateUser",new User());
+        model.addAttribute("updateUser", user);
         return "admin/user/update";
     }
 

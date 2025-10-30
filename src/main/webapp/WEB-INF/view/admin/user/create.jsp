@@ -82,19 +82,17 @@
                                 <form:input type="text" class="form-control" path="address"/>
                             </div>
                             <div class="col-md-4">
+                                <c:set var="errorRole">
+                                    <form:errors path="role" cssClass="invalid-feedback"/>
+                                </c:set>
                                 <label class="form-label">Vai trò</label>
-<%--                                <form:select class="form-select"  path="role.name">--%>
-<%--                                    <form:option value="">-- Chọn vai trò --</form:option>--%>
-<%--                                    <form:option value="ADMIN">Admin</form:option>--%>
-<%--                                    <form:option value="USER">Người dùng</form:option>--%>
-<%--                                    <form:option value="LANDLORD">Người cho thuê</form:option>--%>
-<%--                                </form:select>--%>
-                                <form:select class="form-select"  path="role">
+                                <form:select path="role" class="form-select ${not empty errorRole ? 'is-invalid' : ''}">
                                     <form:option value="">-- Chọn vai trò --</form:option>
                                     <form:option value="1">Người cho thuê</form:option>
                                     <form:option value="2">Người thuê phòng</form:option>
                                     <form:option value="3">Admin</form:option>
                                 </form:select>
+                                ${errorRole}
                             </div>
                         </div>
 

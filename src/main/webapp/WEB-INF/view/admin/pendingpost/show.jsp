@@ -40,7 +40,7 @@
                         <td>${pendingPost.user.fullName}</td>
                         <td>${pendingPost.createdAtFormatted}</td>
                         <td>
-                            <a href="/admin/post/detail/${pendingPost.id}" class="btn btn-sm btn-info me-1">
+                            <a href="/admin/pendingpost/detail/${pendingPost.id}" class="btn btn-sm btn-info me-1">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <a href="/admin/pendingpost/approve/${pendingPost.id}" class="btn btn-sm btn-success me-1">

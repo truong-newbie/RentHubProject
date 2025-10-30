@@ -25,6 +25,13 @@ public class PendingPostController {
         return "admin/pendingpost/show";
     }
 
+    @GetMapping("/admin/pendingpost/detail/{id}")
+    public String getDetailPendingPost(@PathVariable long id, Model model){
+        RoomListing post= this.postService.getPostById(id);
+        model.addAttribute("post",post);
+        return "admin/pendingpost/detail";
+    }
+
     @GetMapping("/admin/pendingpost/approve/{id}")
     public String getApprovePendingPost(Model model, @PathVariable long id){
         RoomListing post= this.postService.getPostById(id);

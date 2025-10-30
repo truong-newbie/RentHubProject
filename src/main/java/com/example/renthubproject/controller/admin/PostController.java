@@ -65,8 +65,9 @@ public class PostController {
     }
 
     @GetMapping("/admin/post/hide/{id}")
-    public String confirmHide(@PathVariable Long id) {
-
+    public String confirmHide(@PathVariable Long id, Model model) {
+        RoomListing post= this.postService.getPostById(id);
+        model.addAttribute("post", post);
         return "admin/post/hide";
     }
 
@@ -79,7 +80,9 @@ public class PostController {
     }
 
     @GetMapping("/admin/post/delete/{id}")
-    public String confirmDelete(@PathVariable Long id) {
+    public String confirmDelete(@PathVariable Long id, Model model) {
+        RoomListing post= this.postService.getPostById(id);
+        model.addAttribute("post", post);
         return "admin/post/delete";
     }
 

@@ -18,7 +18,8 @@
             <h4 class="text-warning mb-4"><i class="fas fa-eye-slash"></i> Ẩn bài viết</h4>
             <p>Bạn có chắc muốn ẩn bài viết này không?</p>
 
-            <form action="/admin/post/hide/1" method="post" class="d-inline">
+            <form action="/admin/post/hide/${post.id}" method="post" class="d-inline">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button type="submit" class="btn btn-warning me-2"><i class="fas fa-eye-slash"></i> Ẩn</button>
             </form>
 

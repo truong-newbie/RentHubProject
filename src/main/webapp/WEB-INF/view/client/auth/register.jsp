@@ -30,6 +30,9 @@
             <c:set var="errorEmail">
                 <form:errors path="email" cssClass="invalid-feedback"/>
             </c:set>
+            <c:set var="errorRole">
+                <form:errors path="role_id" cssClass="invalid-feedback"/>
+            </c:set>
 
             <div class="mb-3">
                 <label for="fullName" class="form-label">Họ và Tên</label>
@@ -52,11 +55,12 @@
 
             <div class="mb-3">
                 <label for="role" class="form-label">Chọn vai trò</label>
-                <form:select path="role_id" id="role" class="form-select">
+                <form:select path="role_id" id="role" class="form-select ${not empty errorRole ? 'is-invalid' : ''}">
                     <form:option value="" label="-- Chọn vai trò --"/>
                     <form:option value="1" label="Người cho thuê"/>
                     <form:option value="2" label="Người thuê"/>
                 </form:select>
+                ${errorRole}
             </div>
 
             <div class="mb-3">

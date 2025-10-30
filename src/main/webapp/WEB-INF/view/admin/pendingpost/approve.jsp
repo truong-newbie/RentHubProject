@@ -19,6 +19,7 @@
             <p>Bạn có chắc muốn <strong class="text-success">duyệt</strong> bài viết này không?</p>
 
             <form action="/admin/pendingpost/approve/${post.id}" method="post" class="d-inline">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button type="submit" class="btn btn-success me-2">
                     <i class="fas fa-check"></i> Duyệt
                 </button>

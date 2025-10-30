@@ -20,6 +20,7 @@
             <p>Bạn có chắc muốn xóa người dùng <strong>${user.fullName}</strong> không?</p>
 
             <form action="/admin/user/delete/${user.id}" method="post" class="d-inline">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button type="submit" class="btn btn-danger btn-sm me-2">
                     <i class="fas fa-trash"></i> Xóa
                 </button>
