@@ -1,9 +1,12 @@
 package com.example.renthubproject.controller.admin;
 import com.example.renthubproject.domain.model.PostStatus;
 import com.example.renthubproject.domain.model.RoomListing;
+import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.service.PostService;
 import com.example.renthubproject.service.UploadService;
 import com.example.renthubproject.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +43,16 @@ public class PostController {
 
     @PostMapping("/admin/post/create")
     public String createPostPage(@ModelAttribute("post") RoomListing post,
-           @RequestParam("TruongFile") List<MultipartFile> files,
-            Principal principal){
+           @RequestParam("TruongFile") List<MultipartFile> files
+            ){
+        // Lay user dang dang nhap
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email=auth.getName();
+        User currentUser= this.userService.getUserByEmail(email);
+
+        // Luu user vao post
+        post.setUser(currentUser);
+
         List<String> fileNames= new ArrayList<>();
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
@@ -50,9 +61,6 @@ public class PostController {
                 post.setImages(fileNames);
             }
         }
-//        User currentUser = this.userService.findByEmail(principal.getName());
-//        post.setUser(currentUser);
-
         this.postService.handleSavePost(post);
         return "redirect:/admin/post";
     }
