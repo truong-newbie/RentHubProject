@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -33,8 +34,26 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-2">Tổng Tin Đăng</h6>
-                                <h2 class="mb-0">1,248</h2>
-                                <small class="text-success"><i class="fas fa-arrow-up"></i> +18% tháng này</small>
+                                <h2 class="mb-0">${fn:length(allPosts)}</h2>
+                                <c:choose>
+                                    <c:when test="${growthRateAllPost > 0}">
+                                        <small class="text-success">
+                                            <i class="fas fa-arrow-up"></i> +${growthRateAllPost}% so với ngày hôm qua
+                                        </small>
+                                    </c:when>
+
+                                    <c:when test="${growthRateAllPost < 0}">
+                                        <small class="text-danger">
+                                            <i class="fas fa-arrow-down"></i> ${growthRateAllPost}% so với ngày hôm qua
+                                        </small>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <small class="text-secondary">
+                                            <i class="fas fa-minus"></i> Không thay đổi so với ngày hôm qua
+                                        </small>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-newspaper"></i>
@@ -47,8 +66,26 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-2">Tin Đang Hiển Thị</h6>
-                                <h2 class="mb-0">956</h2>
-                                <small class="text-success"><i class="fas fa-arrow-up"></i> +12% tháng này</small>
+                                <h2 class="mb-0">${fn:length(viewPosts)}</h2>
+                                <c:choose>
+                                    <c:when test="${growthRateDisplayPost > 0}">
+                                        <small class="text-success">
+                                            <i class="fas fa-arrow-up"></i> +${growthRateDisplayPost}% so với ngày hôm qua
+                                        </small>
+                                    </c:when>
+
+                                    <c:when test="${growthRateDisplayPost < 0}">
+                                        <small class="text-danger">
+                                            <i class="fas fa-arrow-down"></i> ${growthRateDisplayPost}% so với ngày hôm qua
+                                        </small>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <small class="text-secondary">
+                                            <i class="fas fa-minus"></i> Không thay đổi so với ngày hôm qua
+                                        </small>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-check-circle"></i>
@@ -61,7 +98,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-2">Chờ Duyệt</h6>
-                                <h2 class="mb-0">34</h2>
+                                <h2 class="mb-0">${fn:length(pendingPosts)}</h2>
                                 <small class="text-warning"><i class="fas fa-clock"></i> Cần xử lý</small>
                             </div>
                             <div class="icon">
@@ -75,8 +112,26 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-2">Người Dùng</h6>
-                                <h2 class="mb-0">5,832</h2>
-                                <small class="text-success"><i class="fas fa-arrow-up"></i> +245 tuần này</small>
+                                <h2 class="mb-0">${fn:length(users)}</h2>
+                                <c:choose>
+                                    <c:when test="${growthRateUser > 0}">
+                                        <small class="text-success">
+                                            <i class="fas fa-arrow-up"></i> +${growthRateUser} so với ngày hôm qua
+                                        </small>
+                                    </c:when>
+
+                                    <c:when test="${growthRateUser < 0}">
+                                        <small class="text-danger">
+                                            <i class="fas fa-arrow-down"></i> ${growthRateUser} so với ngày hôm qua
+                                        </small>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <small class="text-secondary">
+                                            <i class="fas fa-minus"></i> Không thay đổi so với ngày hôm qua
+                                        </small>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-users"></i>
@@ -104,39 +159,30 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/80x60" class="post-image" alt="Phòng"></td>
-                                    <td>
-                                        <strong>Phòng trọ cao cấp gần ĐH Bách Khoa</strong><br>
-                                        <small class="text-muted">Quận 10, TP.HCM</small>
-                                    </td>
-                                    <td>Nguyễn Văn A</td>
-                                    <td><strong class="text-danger">3.5 triệu/tháng</strong></td>
-                                    <td><span class="badge bg-warning badge-status">Chờ duyệt</span></td>
-                                    <td>10:30 AM</td>
+
+                                    <c:forEach var="post" items="${lastFivePosts}" >
+                                        <tr>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${empty post.images}">
+                                                        <img src="${pageContext.request.contextPath}/resources/images/roomImages/default_roomImage.png" alt="Ảnh mặc định" class="post-image">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img src="${pageContext.request.contextPath}/resources/images/roomImages/${post.images[0]}" alt="${post.title}" class="post-image">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                        <td>
+                                            <strong>${post.title}</strong><br>
+                                            <small class="text-muted">${post.address}</small>
+                                        </td>
+                                            <td>${post.user.fullName}</td>
+                                            <td><strong class="text-danger">${post.price} triệu/tháng</strong></td>
+                                        <td><span class="badge bg-warning badge-status">${post.status}</span></td>
+                                        <td>${post.createdAtFormatted}</td>
                                 </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/80x60" class="post-image" alt="Phòng"></td>
-                                    <td>
-                                        <strong>Nhà trọ giá rẻ Quận 7</strong><br>
-                                        <small class="text-muted">Quận 7, TP.HCM</small>
-                                    </td>
-                                    <td>Trần Thị B</td>
-                                    <td><strong class="text-danger">2.8 triệu/tháng</strong></td>
-                                    <td><span class="badge bg-success badge-status">Đã duyệt</span></td>
-                                    <td>09:15 AM</td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/80x60" class="post-image" alt="Phòng"></td>
-                                    <td>
-                                        <strong>Căn hộ mini đầy đủ nội thất</strong><br>
-                                        <small class="text-muted">Quận Bình Thạnh, TP.HCM</small>
-                                    </td>
-                                    <td>Lê Văn C</td>
-                                    <td><strong class="text-danger">5.0 triệu/tháng</strong></td>
-                                    <td><span class="badge bg-success badge-status">Đã duyệt</span></td>
-                                    <td>08:45 AM</td>
-                                </tr>
+                                    </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>

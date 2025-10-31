@@ -8,6 +8,8 @@ import com.example.renthubproject.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,6 +85,22 @@ public class UserService {
 
     public User getUserByEmail(String email){
         return this.userRepository.findByEmail(email);
+    }
+
+    public long getGrowthRateUsers(){
+        LocalDate today = LocalDate.now();
+        LocalDate yesterday= today.minusDays(1);
+
+        LocalDateTime startOfToday = today.atStartOfDay();
+        LocalDateTime endOfToday = today.atTime(23, 59, 59);
+
+        LocalDateTime startOfYesterday = yesterday.atStartOfDay();
+        LocalDateTime endOfYesterday = yesterday.atTime(23, 59, 59);
+
+        long todayCount= this.userRepository.countByDateTimeRange(startOfToday, endOfToday);
+        long yesterdayCount= this.userRepository.countByDateTimeRange(startOfYesterday, endOfYesterday);
+
+        return todayCount-yesterdayCount;
     }
 
 }

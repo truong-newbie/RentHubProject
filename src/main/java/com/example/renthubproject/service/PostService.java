@@ -5,6 +5,9 @@ import com.example.renthubproject.domain.model.RentalType;
 import com.example.renthubproject.domain.model.RoomListing;
 import com.example.renthubproject.repository.PostRepository;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +45,17 @@ public class PostService {
         return pendingPost;
     }
 
+    public List<RoomListing> getViewPost(){
+        List<RoomListing> viewPost= new ArrayList<>();
+        List<RoomListing> allPost= this.postRepository.findAll();
+        for(RoomListing room: allPost){
+            if(room.getStatus() == PostStatus.APPROVED){
+                viewPost.add(room);
+            }
+        }
+        return viewPost;
+    }
+
     public List<RoomListing> getAllPostRentalRoom(){
         return this.postRepository.findByRentalType(RentalType.PHONG_TRO);
     }
@@ -50,5 +64,49 @@ public class PostService {
     }
     public List<RoomListing> getAllPostFlat(){
         return this.postRepository.findByRentalType(RentalType.CAN_HO);
+    }
+
+    public double getGrowthRatePosts(){
+        LocalDate today= LocalDate.now();
+        LocalDate yesterday= today.minusDays(1);
+
+        LocalDateTime startOfToday = today.atStartOfDay();
+        LocalDateTime endOfToday = today.atTime(23, 59, 59);
+
+        LocalDateTime startOfYesterday = yesterday.atStartOfDay();
+        LocalDateTime endOfYesterday = yesterday.atTime(23, 59, 59);
+
+        long todayCount= this.postRepository.countByDateTimeRange(startOfToday, endOfToday);
+        long yesterdayCount= this.postRepository.countByDateTimeRange(startOfYesterday, endOfYesterday);
+
+        if(yesterdayCount ==0 && todayCount >0){
+            return 100.0;
+        }
+        if(yesterdayCount==0){
+            return 0.0;
+        }
+        return ((double)(todayCount-yesterdayCount)/yesterdayCount)*100;
+    }
+
+    public double getGrowthRateDisplayPost(){
+        LocalDate today= LocalDate.now();
+        LocalDate yesterday= today.minusDays(1);
+
+        LocalDateTime startOfToday = today.atStartOfDay();
+        LocalDateTime endOfToday = today.atTime(23, 59, 59);
+
+        LocalDateTime startOfYesterday = yesterday.atStartOfDay();
+        LocalDateTime endOfYesterday = yesterday.atTime(23, 59, 59);
+
+        long displayToday = postRepository.countByStatusAndDateTimeRange(PostStatus.APPROVED, startOfToday, endOfToday);
+        long displayYesterday = postRepository.countByStatusAndDateTimeRange(PostStatus.APPROVED, startOfYesterday, endOfYesterday);
+
+        if( displayYesterday==0 && displayToday>0){
+            return 100.0;
+        }
+        if(displayToday==0){
+            return 0.0;
+        }
+        return ((double)(displayToday - displayYesterday) / displayYesterday) * 100;
     }
 }

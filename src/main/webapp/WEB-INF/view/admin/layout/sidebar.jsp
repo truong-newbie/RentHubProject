@@ -5,7 +5,7 @@
         NhaTro247
     </div>
     <nav class="nav flex-column mt-3">
-        <a class="nav-link active" href="/admin" onclick="showSection('dashboard'); return false;">
+        <a class="nav-link " href="/admin" onclick="showSection('dashboard'); return false;">
             <i class="fas fa-chart-line"></i> Tổng Quan
         </a>
         <a class="nav-link" href="/admin/post" onclick="showSection('posts'); return false;">
