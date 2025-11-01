@@ -5,9 +5,7 @@
         <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
             <c:choose>
                 <c:when test="${not empty sessionScope.avatar}">
-                        <c:forEach var="img" items="${post.images}">
                             <img src="${pageContext.request.contextPath}/images/avatar/${sessionScope.avatar}" class="user-avatar" alt="Admin">
-                        </c:forEach>
                 </c:when>
                 <c:otherwise>
                     <img src="${pageContext.request.contextPath}/images/avatar/default-avatar.jpg" alt="Default roomImage" class="user-avatar">

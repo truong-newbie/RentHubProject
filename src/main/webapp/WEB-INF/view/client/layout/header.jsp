@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="${pageContext.request.contextPath}/resources/css/owner/styles.css" rel="stylesheet" >
+<%--<link href="${pageContext.request.contextPath}/resources/css/owner/styles.css" rel="stylesheet" >--%>
 <header class="navbar-custom">
     <div class="container position-relative">
         <div class="d-flex justify-content-between align-items-center">
@@ -19,7 +19,14 @@
             <c:if test="${not empty pageContext.request.userPrincipal}">
                 <!-- Avatar -->
                 <div class="user-avatar" onclick="toggleDropdown(event)">
-                    G
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.avatar}">
+                            <img src="${pageContext.request.contextPath}/images/avatar/${sessionScope.avatar}" class="user-avatar" alt="Admin">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="${pageContext.request.contextPath}/images/avatar/default-avatar.jpg" alt="Default roomImage" class="user-avatar">
+                        </c:otherwise>
+                    </c:choose>
                 </div>
 
                 <!-- Dropdown -->
@@ -93,15 +100,16 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: #007bff;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
+        overflow: hidden;
         cursor: pointer;
-        user-select: none;
     }
+
+    .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
 
     /* Dropdown ẩn mặc định */
     .user-dropdown {
