@@ -1,15 +1,19 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="top-navbar d-flex justify-content-end align-items-center gap-3">
-    <button class="btn btn-light position-relative">
-        <i class="fas fa-bell"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            12
-        </span>
-    </button>
     <div class="dropdown">
         <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
-            <img src="https://ui-avatars.com/api/?name=Admin&background=3b82f6&color=fff" class="user-avatar" alt="Admin">
-            <span>Admin</span>
+            <c:choose>
+                <c:when test="${not empty sessionScope.avatar}">
+                        <c:forEach var="img" items="${post.images}">
+                            <img src="${pageContext.request.contextPath}/images/avatar/${sessionScope.avatar}" class="user-avatar" alt="Admin">
+                        </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <img src="${pageContext.request.contextPath}/images/avatar/default-avatar.jpg" alt="Default roomImage" class="user-avatar">
+                </c:otherwise>
+            </c:choose>
+            <span>${sessionScope.fullName}</span>
         </button>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Hồ Sơ</a></li>
