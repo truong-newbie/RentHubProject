@@ -1,6 +1,7 @@
 package com.example.renthubproject.domain.model;
 
 import com.example.renthubproject.service.validate.StrongPassword;
+import com.example.renthubproject.service.validate.UniqueEmail;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -27,12 +28,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank(message = "This field cannot be blank.")
+    @NotBlank(message = "Trường thông tin này không được để trống")
     @Size(min=3, message = "Tên phải có tối thiểu 3 ký tự")
     private String fullName;
 
-    @NotBlank(message = "This field cannot be blank.")
+    @NotBlank(message = "Trường thông tin này không được để trống")
     @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    @UniqueEmail
     private String email;
 
 //    @StrongPassword

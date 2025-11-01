@@ -78,15 +78,12 @@ public class UserController {
     public String updateUser(Model model,@PathVariable long id,@ModelAttribute("updateUser") @Valid User updateUser,
     BindingResult bindingResult,
     @RequestParam("TruongFile") MultipartFile file){
-        System.out.println(0);
         if (bindingResult.hasErrors()) {
         return "admin/user/update";
         }
-        System.out.println(1);
         String avatar= this.uploadService.handleSaveUploadFile(file,"avatar");
         updateUser.setAvatar(avatar);
         this.userService.handleUpdateUser(id,updateUser);
-        System.out.println(2);
         return "redirect:/admin/user";
     }
 
