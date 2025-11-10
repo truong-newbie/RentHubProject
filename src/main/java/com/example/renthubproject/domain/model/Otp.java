@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 @Entity
 @Getter
@@ -24,4 +25,10 @@ public class Otp {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+    public static String generateOtp(){
+        Random random= new Random();
+        int otp = 100000+ random.nextInt(900000);
+        return String.valueOf(otp);
+    }
 }

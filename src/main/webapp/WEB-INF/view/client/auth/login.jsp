@@ -41,10 +41,12 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </div>
 
-            <!--  Nút Remember Me -->
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" id="rememberMe" name="remember-me">
-                <label class="form-check-label" for="rememberMe">Ghi nhớ đăng nhập</label>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rememberMe" name="remember-me">
+                    <label class="form-check-label" for="rememberMe">Ghi nhớ đăng nhập</label>
+                </div>
+                <a href="${pageContext.request.contextPath}/forgot-password" class="text-decoration-none">Quên mật khẩu?</a>
             </div>
 
             <div class="d-grid mb-3">

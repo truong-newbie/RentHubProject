@@ -1,6 +1,5 @@
 package com.example.renthubproject.domain.model;
 
-import com.example.renthubproject.service.validate.StrongPassword;
 import com.example.renthubproject.service.validate.UniqueEmail;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -34,7 +33,7 @@ public class User {
 
     @NotBlank(message = "Trường thông tin này không được để trống")
     @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
-    @UniqueEmail
+//    @UniqueEmail
     private String email;
 
 //    @StrongPassword

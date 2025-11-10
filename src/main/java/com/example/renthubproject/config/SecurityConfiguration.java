@@ -16,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
+
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
@@ -59,11 +60,13 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD,
                                 DispatcherType.INCLUDE).permitAll()
                         .requestMatchers("/", "/login", "/client/**","/resources/**", "/css/**","/register",
-                                "/images/**","/rentalroom","/entirehouse","/flat").permitAll()
+                                "/images/**","/rentalroom","/entirehouse","/flat"
+                        ,"/forgot-password/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/owner/**").hasRole("OWNER")
                         .anyRequest().authenticated())

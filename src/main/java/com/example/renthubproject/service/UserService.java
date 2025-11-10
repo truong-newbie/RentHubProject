@@ -103,4 +103,10 @@ public class UserService {
         return todayCount-yesterdayCount;
     }
 
+    public void updatePassword(String email, String passord){
+        User user= this.userRepository.findByEmail(email);
+        user.setPassword(passord);
+    }
+
+
 }
