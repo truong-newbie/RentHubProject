@@ -5,8 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Đăng nhập</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .input-group .btn {
+            background-color: transparent;
+            border-color: #ced4da;
+        }
+        .input-group .btn:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+
 </head>
+
+
 <body class="bg-light">
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow-lg p-4" style="width: 400px;">
@@ -34,9 +47,16 @@
 
             <div class="mb-3">
                 <label for="password" class="form-label">Mật khẩu</label>
-                <input type="password" class="form-control" id="password" name="password"
-                       placeholder="Nhập mật khẩu" required>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" name="password"
+                           placeholder="Nhập mật khẩu" required>
+                    <button type="button" class="btn btn-outline-secondary border-start-0" id="togglePassword">
+                        <i class="bi bi-eye-slash"></i>
+                    </button>
+                </div>
             </div>
+
+
             <div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </div>
@@ -60,5 +80,17 @@
         </form>
     </div>
 </div>
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        this.querySelector('i').classList.toggle('bi-eye');
+        this.querySelector('i').classList.toggle('bi-eye-slash');
+    });
+</script>
 </body>
 </html>
