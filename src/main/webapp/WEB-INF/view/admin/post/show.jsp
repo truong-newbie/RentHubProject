@@ -25,58 +25,69 @@
 
             </div>
 
-            <table class="table table-bordered table-hover bg-white">
-                <thead class="table-primary text-center">
-                <tr>
-                    <th>Id</th>
-                    <th>Tiêu đề</th>
-                    <th>Người đăng</th>
-                    <th>Ngày đăng</th>
-                    <th>Trạng thái</th>
-                    <th>Hành động</th>
-                </tr>
-                </thead>
-                <tbody class="align-middle text-center">
-                <c:forEach var="post" items="${posts}" >
+            <c:if test="${empty posts}">
+                <div class="alert alert-warning text-center" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Hiện tại không có người dùng nào.
+                </div>
+            </c:if>
+            <c:if test="${not empty posts}">
+                <table class="table table-bordered table-hover bg-white">
+                    <thead class="table-primary text-center">
                     <tr>
-                        <td>${post.id}</td>
-                        <td>${post.title}</td>
-                        <td>${post.user.fullName}</td>
-                        <td>${post.createdAtFormatted}</td>
-                        <td><span class="badge bg-success">${post.status}</span></td>
-                        <td>
-                            <a href="/admin/post/detail/${post.id}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                            <a href="/admin/post/hide/${post.id}" class="btn btn-sm btn-warning"><i class="fas fa-eye-slash"></i></a>
-                            <a href="/admin/post/delete/${post.id}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                        </td>
+                        <th>Id</th>
+                        <th>Tiêu đề</th>
+                        <th>Người đăng</th>
+                        <th>Ngày đăng</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="${1 eq currentPage ? 'disabled page-link': 'page-link'}"
-                           href="/admin/post?page=${currentPage -1}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
-                        <li class="page-item"><a
-                                class="${loop.index+1 eq currentPage ? 'active page-link': 'page-link'}"
-                                href="/admin/post?page=${loop.index+1}">${loop.index +1}</a>
-                        </li>
+                    </thead>
+                    <tbody class="align-middle text-center">
+                    <c:forEach var="post" items="${posts}" >
+                        <tr>
+                            <td>${post.id}</td>
+                            <td>${post.title}</td>
+                            <td>${post.user.fullName}</td>
+                            <td>${post.createdAtFormatted}</td>
+                            <td><span class="badge bg-success">${post.status}</span></td>
+                            <td>
+                                <a href="/admin/post/detail/${post.id}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                                <a href="/admin/post/hide/${post.id}" class="btn btn-sm btn-warning"><i class="fas fa-eye-slash"></i></a>
+                                <a href="/admin/post/delete/${post.id}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
                     </c:forEach>
-                    <li class="page-item">
-                        <a class="${totalPages eq currentPage ? 'disabled page-link': 'page-link'}"
-                           href="/admin/post?page=${currentPage +1}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-hover bg-white">
+                </table>
+            </c:if>
+            <c:if test="${totalPages > 0}">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="${1 eq currentPage ? 'disabled page-link': 'page-link'}"
+                               href="/admin/post?page=${currentPage -1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
+                            <li class="page-item"><a
+                                    class="${loop.index+1 eq currentPage ? 'active page-link': 'page-link'}"
+                                    href="/admin/post?page=${loop.index+1}">${loop.index +1}</a>
+                            </li>
+                        </c:forEach>
+                        <li class="page-item">
+                            <a class="${totalPages eq currentPage ? 'disabled page-link': 'page-link'}"
+                               href="/admin/post?page=${currentPage +1}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </c:if>
         </div>
     </div>
 </div>

@@ -22,70 +22,82 @@
                 <a href="/admin/user/create" class="btn btn-primary"><i class="fas fa-plus me-1"></i> Thêm mới</a>
             </div>
 
-            <table class="table table-bordered table-hover bg-white">
-                <thead class="table-primary">
-                <tr>
-                    <th>Id</th>
-                    <th>Tên người dùng</th>
-                    <th>Email</th>
-                    <th>Vai trò</th>
-                    <th>Ngày tạo</th>
-                    <th>Hành động</th>
-                </tr>
-                </thead>
-                <tbody>
+            <c:if test="${empty users}">
+                <div class="alert alert-warning text-center" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Hiện tại không có người dùng nào.
+                </div>
+            </c:if>
+            <c:if test="${not empty users}">
+                <table class="table table-bordered table-hover bg-white">
+                    <thead class="table-primary">
+                    <tr>
+                        <th>Id</th>
+                        <th>Tên người dùng</th>
+                        <th>Email</th>
+                        <th>Vai trò</th>
+                        <th>Ngày tạo</th>
+                        <th>Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <c:forEach items="${users}" var="user" varStatus="loop">
-                <tr>
-                    <td>${loop.index + 1}</td>
-                    <td>${user.fullName}</td>
-                    <td>${user.email}</td>
-                    <td>${user.role.name}</td>
-                    <td>${user.createdAtFormatted}</td>
-                    <td>
-                        <!-- Nút xem chi tiết -->
-                        <a href="/admin/user/detail/${user.id}" class="btn btn-success btn-sm">
-                            <i class="fas fa-eye"></i>
-                        </a>
+                        <tr>
+                            <td>${loop.index + 1}</td>
+                            <td>${user.fullName}</td>
+                            <td>${user.email}</td>
+                            <td>${user.role.name}</td>
+                            <td>${user.createdAtFormatted}</td>
+                            <td>
+                                <!-- Nút xem chi tiết -->
+                                <a href="/admin/user/detail/${user.id}" class="btn btn-success btn-sm">
+                                    <i class="fas fa-eye"></i>
+                                </a>
 
-                        <!-- Nút sửa -->
-                        <a href="/admin/user/update/${user.id}" class="btn btn-warning btn-sm">
-                            <i class="fas fa-pen"></i>
-                        </a>
+                                <!-- Nút sửa -->
+                                <a href="/admin/user/update/${user.id}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-pen"></i>
+                                </a>
 
-                        <!-- Nút xóa -->
-                        <a href="/admin/user/delete/${user.id}" class="btn btn-danger btn-sm">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-                </c:forEach>
-
-                </tbody>
-            </table>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="${1 eq currentPage ? 'disabled page-link': 'page-link'}"
-                           href="/admin/user?page=${currentPage -1}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
-                        <li class="page-item"><a
-                                class="${loop.index+1 eq currentPage ? 'active page-link': 'page-link'}"
-                                href="/admin/user?page=${loop.index+1}">${loop.index +1}</a>
-                        </li>
+                                <!-- Nút xóa -->
+                                <a href="/admin/user/delete/${user.id}" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
                     </c:forEach>
-                    <li class="page-item">
-                        <a class="${totalPages eq currentPage ? 'disabled page-link': 'page-link'}"
-                           href="/admin/user?page=${currentPage +1}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-hover bg-white">
+                </table>
+            </c:if>
+            <c:if test="${totalPages > 0}">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="${1 eq currentPage ? 'disabled page-link': 'page-link'}"
+                               href="/admin/user?page=${currentPage -1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
+                            <li class="page-item"><a
+                                    class="${loop.index+1 eq currentPage ? 'active page-link': 'page-link'}"
+                                    href="/admin/user?page=${loop.index+1}">${loop.index +1}</a>
+                            </li>
+                        </c:forEach>
+                        <li class="page-item">
+                            <a class="${totalPages eq currentPage ? 'disabled page-link': 'page-link'}"
+                               href="/admin/user?page=${currentPage +1}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </c:if>
+
 
         </div>
     </div>
