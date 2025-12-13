@@ -44,10 +44,6 @@
                 <span class="balance-amount">1/1</span>
             </div>
 
-            <button class="dropdown-btn">
-                <i class="bi bi-coin"></i>
-                Nạp tiền
-            </button>
         </div>
 
         <div class="dropdown-menu-items">
@@ -77,19 +73,61 @@
     </div>
 
     <!-- Empty State -->
-    <div class="empty-state">
-        <i class="bi bi-house-fill"></i>
-        <h4>BẠN CHƯA CÓ NHÀ TRỌ NÀO</h4>
-        <p>Hãy tạo mới nhà trọ để bắt đầu quản lý phòng thuê, khách<br>hợp đồng, thu chi và quảng cáo miễn phí trên Trợ Mới!</p>
-        <a href="#" style="color: var(--primary-blue); text-decoration: none; margin-bottom: 20px; display: inline-block;">
-            Tiếp cận hàng ngàn khách thuê mới ngay.
-        </a>
-        <br>
-        <button class="btn-add-property">
-            <i class="bi bi-house-add-fill"></i>
-            Thêm trọ mới
-        </button>
-    </div>
+    <c:if test="${countPosts == 0}">
+        <div class="empty-state">
+            <i class="bi bi-house-fill"></i>
+            <h4>BẠN CHƯA CÓ NHÀ TRỌ NÀO</h4>
+            <p>Hãy tạo mới nhà trọ để bắt đầu quản lý phòng thuê, khách<br>hợp đồng, thu chi và quảng cáo miễn phí trên Trợ Mới!</p>
+            <a href="#" style="color: var(--primary-blue); text-decoration: none; margin-bottom: 20px; display: inline-block;">
+                Tiếp cận hàng ngàn khách thuê mới ngay.
+            </a>
+            <br>
+            <a href="/owner/create" class="btn btn-add-property">
+                <i class="bi bi-house-add-fill"></i>
+                Thêm trọ mới
+            </a>
+        </div>
+    </c:if>
+    <c:if test="${countPosts > 0}" >
+        <div class="container-fluid p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4><i class="fas fa-newspaper me-2"></i> Quản Lý Tin Đăng</h4>
+                <button class="btn btn-primary" onclick="window.location.href='/owner/create'">
+                    <i class="fas fa-plus me-1"></i> Thêm mới
+                </button>
+
+            </div>
+
+            <table class="table table-bordered table-hover bg-white">
+                <thead class="table-primary text-center">
+                <tr>
+                    <th>Id</th>
+                    <th>Tiêu đề</th>
+                    <th>Ngày đăng</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody class="align-middle text-center">
+                <c:forEach var="post" items="${posts}" varStatus="loop">
+                    <tr>
+                        <td>${loop.index + 1}</td>
+                        <td>${post.title}</td>
+                        <td>${post.createdAtFormatted}</td>
+                        <td><span class="badge bg-success">${post.status}</span></td>
+                        <td>
+                            <a href="/admin/post/detail/${post.id}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                            <a href="/admin/post/hide/${post.id}" class="btn btn-sm btn-warning"><i class="fas fa-eye-slash"></i></a>
+                            <a href="/admin/post/delete/${post.id}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </c:forEach>
+
+                </tbody>
+            </table>
+        </div>
+
+    </c:if>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

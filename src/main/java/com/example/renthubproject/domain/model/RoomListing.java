@@ -33,7 +33,30 @@ public class RoomListing {
 
     private BigDecimal price;
     private String address;
-    private long  views_count;
+
+    @Column(name = "view_count")
+    private Long viewCount = 0L;
+
+    private Double area;            //dien tich
+
+    @ElementCollection // Đánh dấu đây là một Collection của các kiểu cơ bản
+    @CollectionTable(name = "room_amenities", joinColumns = @JoinColumn(name = "room_id")) // Tạo bảng riêng
+    @Column(name = "amenity_name") // Tên cột trong bảng mới chứa các chuỗi
+    private List<String> amenities; // tien nghi
+
+    @ElementCollection
+    @CollectionTable(name = "room_neighborhood", joinColumns = @JoinColumn(name = "room_id"))
+    @Column(name = "neighborhood_name")
+    private List<String> neighborhood;  // moi truong xung quanh
+
+    @ElementCollection
+    @CollectionTable(name = "room_tenantType", joinColumns = @JoinColumn(name = "room_id"))
+    @Column(name = "tenantType_name")
+    private List<String> tenantType;  //doi tuong thue
+
+    private String phoneNumber;
+    private long roomNumber;
+    private String ownerName;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

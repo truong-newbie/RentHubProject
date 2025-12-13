@@ -71,7 +71,7 @@
                 </div>
             </c:if>
 
-            <a href="#" class="btn-dang-tin">Đăng tin</a>
+            <a href="/owner" class="btn-dang-tin">Đăng tin</a>
         </div>
     </div>
 </header>

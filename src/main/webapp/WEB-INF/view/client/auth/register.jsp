@@ -49,7 +49,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="phoneNumber" class="form-label">Email</label>
+                <label for="phoneNumber" class="form-label">Số điện thoại </label>
                 <form:input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Nhập số điện thoại"  path="phoneNumber"/>
             </div>
 

@@ -118,7 +118,31 @@
                         <input type="checkbox" id="amenity6" name="amenity" value="ke-bep">
                         <label for="amenity6">Kệ bếp</label>
                     </div>
-                    <button class="show-more-btn">Hiển thị thêm</button>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity7" name="amenity" value="may-giat">
+                        <label for="amenity7">Máy giặt</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity8" name="amenity" value="ti-vi">
+                        <label for="amenity8">Tivi</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity9" name="amenity" value="dieu-hoa">
+                        <label for="amenity9">Điều hòa</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity10" name="amenity" value="tu-lanh">
+                        <label for="amenity10">Tủ lạnh</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity11" name="amenity" value="giuong-nem">
+                        <label for="amenity11">Giường nệm</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity12" name="amenity" value="tu-quan-ao">
+                        <label for="amenity12">Tủ quần áo</label>
+                    </div>
+
                 </div>
 
                 <!-- Môi trường xung quanh -->
@@ -179,17 +203,6 @@
                     </div>
                 </div>
 
-                <!-- Video Review -->
-                <div class="filter-section">
-                    <div class="filter-section-title">
-                        Video Review
-                    </div>
-                    <div class="filter-checkbox">
-                        <input type="checkbox" id="video1" name="video" value="co-video">
-                        <label for="video1">Có video review</label>
-                    </div>
-                </div>
-
                 <!-- Filter Actions -->
                 <div class="filter-actions">
                     <button class="btn-apply-filter">Tìm ngay</button>
@@ -201,7 +214,7 @@
         <!-- Listings -->
         <div class="col-lg-9">
             <div class="listings-header">
-                <div class="total-results">Tổng <strong>3.885</strong> kết quả</div>
+                <div class="total-results">Tổng <strong>0</strong> kết quả</div>
                 <select class="sort-select">
                     <option value="newest">Mới nhất</option>
                     <option value="price-asc">Giá thấp đến cao</option>
@@ -226,6 +239,7 @@
                     </div>
                     <div class="listing-content">
                         <h3 class="listing-title">${entireHouse.title}</h3>
+                        <a href="room/${entireHouse.id}" class="listing-title"> ${entireHouse.title}</a>
                         <div class="listing-price">Từ ${entireHouse.price} triệu/tháng</div>
                         <span class="listing-type">${entireHouse.rentalType}</span>
                         <div class="listing-location">
@@ -237,21 +251,21 @@
             </c:forEach>
 
             <!-- Pagination -->
-            <nav aria-label="Page navigation" class="mt-4">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Trước</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#">194</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Sau</a>
-                    </li>
-                </ul>
-            </nav>
+<%--            <nav aria-label="Page navigation" class="mt-4">--%>
+<%--                <ul class="pagination justify-content-center">--%>
+<%--                    <li class="page-item disabled">--%>
+<%--                        <a class="page-link" href="#" tabindex="-1">Trước</a>--%>
+<%--                    </li>--%>
+<%--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>--%>
+<%--                    <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
+<%--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+<%--                    <li class="page-item"><a class="page-link" href="#">...</a></li>--%>
+<%--                    <li class="page-item"><a class="page-link" href="#">194</a></li>--%>
+<%--                    <li class="page-item">--%>
+<%--                        <a class="page-link" href="#">Sau</a>--%>
+<%--                    </li>--%>
+<%--                </ul>--%>
+<%--            </nav>--%>
         </div>
     </div>
 </div>

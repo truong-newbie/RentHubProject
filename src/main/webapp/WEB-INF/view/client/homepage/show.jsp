@@ -38,7 +38,7 @@
                     </div>
                     <div class="property-info">
                         <div class="property-price">Từ ${post.price} triệu/tháng</div>
-                        <div class="property-title">${post.title}</div>
+                        <a href="/room/${post.id}" class="property-title">${post.title}</a>
                         <div class="property-type">${post.rentalType}</div>
                         <div class="property-location">
                             <i class="fas fa-map-marker-alt"></i>

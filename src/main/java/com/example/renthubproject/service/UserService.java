@@ -108,5 +108,10 @@ public class UserService {
         user.setPassword(passord);
     }
 
+    public long findIdByEmail(String email){
+        User user= this.userRepository.findByEmail(email);
+        return user.getId();
+    }
+
 
 }

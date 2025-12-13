@@ -118,7 +118,30 @@
                         <input type="checkbox" id="amenity6" name="amenity" value="ke-bep">
                         <label for="amenity6">Kệ bếp</label>
                     </div>
-                    <button class="show-more-btn">Hiển thị thêm</button>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity7" name="amenity" value="may-giat">
+                        <label for="amenity7">Máy giặt</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity8" name="amenity" value="ti-vi">
+                        <label for="amenity8">Tivi</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity9" name="amenity" value="dieu-hoa">
+                        <label for="amenity9">Điều hòa</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity10" name="amenity" value="tu-lanh">
+                        <label for="amenity10">Tủ lạnh</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity11" name="amenity" value="giuong-nem">
+                        <label for="amenity11">Giường nệm</label>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input type="checkbox" id="amenity12" name="amenity" value="tu-quan-ao">
+                        <label for="amenity12">Tủ quần áo</label>
+                    </div>
                 </div>
 
                 <!-- Môi trường xung quanh -->
@@ -179,17 +202,6 @@
                     </div>
                 </div>
 
-                <!-- Video Review -->
-                <div class="filter-section">
-                    <div class="filter-section-title">
-                        Video Review
-                    </div>
-                    <div class="filter-checkbox">
-                        <input type="checkbox" id="video1" name="video" value="co-video">
-                        <label for="video1">Có video review</label>
-                    </div>
-                </div>
-
                 <!-- Filter Actions -->
                 <div class="filter-actions">
                     <button class="btn-apply-filter">Tìm ngay</button>
@@ -225,7 +237,7 @@
                         </button>
                     </div>
                     <div class="listing-content">
-                        <h3 class="listing-title">${rentalRoom.title}</h3>
+                        <a href="room/${rentalRoom.id}" class="listing-title"> ${rentalRoom.title}</a>
                         <div class="listing-price">Từ ${rentalRoom.price} triệu/tháng</div>
                         <span class="listing-type">${rentalRoom.rentalType}</span>
                         <div class="listing-location">

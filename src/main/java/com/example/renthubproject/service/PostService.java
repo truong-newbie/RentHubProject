@@ -34,6 +34,50 @@ public class PostService {
         this.postRepository.deleteById(id);
     }
 
+    public List<RoomListing> getAllPostsInHomepage(){
+        List<RoomListing> posts= new ArrayList<>();
+        List<RoomListing> allPost=this.postRepository.findAll();
+        for(RoomListing room : allPost){
+            if(room.getStatus() == PostStatus.APPROVED ){
+                posts.add(room);
+            }
+        }
+        return posts;
+    }
+
+    public List<RoomListing> getEntireHouseInHomepage(){
+        List<RoomListing> posts= new ArrayList<>();
+        List<RoomListing> allPost= this.postRepository.findByRentalType(RentalType.NHA_NGUYEN_CAN);
+        for(RoomListing room : allPost){
+            if(room.getStatus() == PostStatus.APPROVED ){
+                posts.add(room);
+            }
+        }
+        return posts;
+    }
+
+    public List<RoomListing> getRentalRoomInHomepage(){
+        List<RoomListing> posts= new ArrayList<>();
+        List<RoomListing> allPost=this.postRepository.findByRentalType(RentalType.PHONG_TRO);
+        for(RoomListing room : allPost){
+            if(room.getStatus() == PostStatus.APPROVED ){
+                posts.add(room);
+            }
+        }
+        return posts;
+    }
+
+    public List<RoomListing> getFlatInHomepage(){
+        List<RoomListing> posts= new ArrayList<>();
+        List<RoomListing> allPost=this.postRepository.findByRentalType(RentalType.CAN_HO);
+        for(RoomListing room : allPost){
+            if(room.getStatus() == PostStatus.APPROVED ){
+                posts.add(room);
+            }
+        }
+        return posts;
+    }
+
     public List<RoomListing> getAllPendingPost(){
         List<RoomListing> pendingPost= new ArrayList<>();
         List<RoomListing> allPost=this.postRepository.findAll();
@@ -108,5 +152,17 @@ public class PostService {
             return 0.0;
         }
         return ((double)(displayToday - displayYesterday) / displayYesterday) * 100;
+    }
+
+    public List<RoomListing> getAllByUserId(Long id){
+        List<RoomListing> rooms = this.postRepository.findAll();
+        ArrayList<RoomListing> roomByUserId = new ArrayList<>();
+
+        for(RoomListing room : rooms){
+            if(room.getUser() != null && room.getUser().getId()== id ){
+                roomByUserId.add(room);
+            }
+        }
+        return roomByUserId;
     }
 }
