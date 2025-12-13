@@ -5,6 +5,9 @@ import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.service.UploadService;
 import com.example.renthubproject.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -29,9 +33,25 @@ public class UserController {
     }
 
     @GetMapping("/admin/user")
-    public String getUserPage(Model model){
-        List<User> users= this.userService.getAllUsers();
-        model.addAttribute("users", users);
+    public String getUserPage(Model model, @RequestParam("page") Optional<String> pageOptional){
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                //convert from string to int
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                //page=1
+            }
+        } catch (Exception e) {
+            //page=1
+            //todo1 : handle exceptoin
+        }
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<User> users = this.userService.getAllUsers(pageable);
+        List<User> listUsers = users.getContent();
+        model.addAttribute("users", listUsers);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", users.getTotalPages());
         return "admin/user/show";
     }
 

@@ -2,9 +2,12 @@ package com.example.renthubproject.service;
 
 import com.example.renthubproject.domain.dto.RegisterDTO;
 import com.example.renthubproject.domain.model.Role;
+import com.example.renthubproject.domain.model.RoomListing;
 import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.repository.RoleRepository;
 import com.example.renthubproject.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -112,6 +115,11 @@ public class UserService {
         User user= this.userRepository.findByEmail(email);
         return user.getId();
     }
+
+    public Page<User> getAllUsers(Pageable pageable){
+        return this.userRepository.findAll(pageable);
+    }
+
 
 
 }

@@ -37,9 +37,9 @@
                 </tr>
                 </thead>
                 <tbody class="align-middle text-center">
-                <c:forEach var="post" items="${posts}" varStatus="loop">
+                <c:forEach var="post" items="${posts}" >
                     <tr>
-                        <td>${loop.index + 1}</td>
+                        <td>${post.id}</td>
                         <td>${post.title}</td>
                         <td>${post.user.fullName}</td>
                         <td>${post.createdAtFormatted}</td>
@@ -53,6 +53,30 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="${1 eq currentPage ? 'disabled page-link': 'page-link'}"
+                           href="/admin/post?page=${currentPage -1}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
+                        <li class="page-item"><a
+                                class="${loop.index+1 eq currentPage ? 'active page-link': 'page-link'}"
+                                href="/admin/post?page=${loop.index+1}">${loop.index +1}</a>
+                        </li>
+                    </c:forEach>
+                    <li class="page-item">
+                        <a class="${totalPages eq currentPage ? 'disabled page-link': 'page-link'}"
+                           href="/admin/post?page=${currentPage +1}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

@@ -5,6 +5,9 @@ import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.service.PostService;
 import com.example.renthubproject.service.UploadService;
 import com.example.renthubproject.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -27,9 +31,25 @@ public class PostController {
     }
 
     @GetMapping("/admin/post")
-    public String getPostPage(Model model){
-        List<RoomListing> posts= this.postService.getAllPosts();
-        model.addAttribute("posts", posts);
+    public String getPostPage(Model model, @RequestParam("page") Optional<String> pageOptional){
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                //convert from string to int
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                //page=1
+            }
+        } catch (Exception e) {
+            //page=1
+            //todo1 : handle exceptoin
+        }
+        Pageable pageable = PageRequest.of(page - 1, 2);
+        Page<RoomListing> posts = this.postService.getAllPosts(pageable);
+        List<RoomListing> listProducts = posts.getContent();
+        model.addAttribute("posts", listProducts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", posts.getTotalPages());
         return "admin/post/show";
     }
 

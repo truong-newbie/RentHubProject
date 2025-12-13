@@ -4,6 +4,8 @@ import com.example.renthubproject.domain.model.PostStatus;
 import com.example.renthubproject.domain.model.RentalType;
 import com.example.renthubproject.domain.model.RoomListing;
 import com.example.renthubproject.repository.PostRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -165,4 +167,13 @@ public class PostService {
         }
         return roomByUserId;
     }
+
+    public Page<RoomListing> getAllPosts(Pageable pageable){
+        return this.postRepository.findAll(pageable);
+    }
+
+    public Page<RoomListing> getAllPendingPosts( Pageable pageable){
+        return this.postRepository.findByStatus(PostStatus.PENDING, pageable);
+    }
+
 }

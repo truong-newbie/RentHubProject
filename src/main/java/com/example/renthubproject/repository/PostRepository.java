@@ -3,6 +3,8 @@ package com.example.renthubproject.repository;
 import com.example.renthubproject.domain.model.PostStatus;
 import com.example.renthubproject.domain.model.RentalType;
 import com.example.renthubproject.domain.model.RoomListing;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -38,5 +40,7 @@ public interface PostRepository extends JpaRepository<RoomListing,Long> {
             @Param("startOfDay") LocalDateTime startOfDay,
             @Param("endOfDay") LocalDateTime endOfDay
     );
+
+    Page<RoomListing> findByStatus(PostStatus status, Pageable pageable);
 
 }
