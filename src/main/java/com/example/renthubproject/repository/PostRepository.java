@@ -43,4 +43,23 @@ public interface PostRepository extends JpaRepository<RoomListing,Long> {
 
     Page<RoomListing> findByStatus(PostStatus status, Pageable pageable);
     Page<RoomListing> findByRentalType(RentalType rentalType, Pageable pageable);
+
+    @Query("""
+SELECT r FROM RoomListing r
+WHERE
+(:keyword IS NULL OR LOWER(r.title) LIKE LOWER(CONCAT('%', :keyword, '%')))
+AND (:minPrice IS NULL OR r.price >= :minPrice)
+AND (:maxPrice IS NULL OR r.price <= :maxPrice)
+AND (:minArea IS NULL OR r.area >= :minArea)
+AND (:maxArea IS NULL OR r.area <= :maxArea)
+""")
+    Page<RoomListing> search(
+            @Param("keyword") String keyword,
+            @Param("minPrice") Double minPrice,
+            @Param("maxPrice") Double maxPrice,
+            @Param("minArea") Double minArea,
+            @Param("maxArea") Double maxArea,
+            Pageable pageable
+    );
+
 }

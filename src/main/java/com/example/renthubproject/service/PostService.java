@@ -199,4 +199,46 @@ public class PostService {
         return this.postRepository.findByRentalType(rentalType,pageable);
     }
 
+    public Page<RoomListing> searchPosts(
+            String keyword,
+            String priceRange,
+            String areaRange,
+            Pageable pageable
+    ) {
+        Double minPrice = null, maxPrice = null;
+        Double minArea = null, maxArea = null;
+
+        // Giá
+        if ("1".equals(priceRange)) {
+            maxPrice = 2.0;
+        } else if ("2".equals(priceRange)) {
+            minPrice = 2.0;
+            maxPrice = 5.0;
+        } else if ("3".equals(priceRange)) {
+            minPrice = 5.0;
+        }
+
+        // Diện tích
+        if ("1".equals(areaRange)) {
+            maxArea = 20.0;
+        } else if ("2".equals(areaRange)) {
+            minArea = 20.0;
+            maxArea = 30.0;
+        } else if ("3".equals(areaRange)) {
+            minArea = 30.0;
+        }
+
+        if (keyword != null && keyword.isBlank()) {
+            keyword = null;
+        }
+
+        return postRepository.search(
+                keyword,
+                minPrice, maxPrice,
+                minArea, maxArea,
+                pageable
+        );
+    }
+
+
 }

@@ -20,21 +20,38 @@
         </div>
 
         <div class="search-box">
-            <input type="text" placeholder="Bạn muốn tìm ở đâu?" class="flex-grow-1">
-            <select class="form-select" style="flex: 0 0 150px;">
-                <option selected>Mức giá</option>
-                <option>Dưới 1 triệu</option>
-                <option>1-2 triệu</option>
-                <option>2-3 triệu</option>
-                <option>Trên 3 triệu</option>
-            </select>
-            <select class="form-select" style="flex: 0 0 150px;">
-                <option selected>Diện tích</option>
-                <option>Dưới 20m²</option>
-                <option>20-30m²</option>
-                <option>Trên 30m²</option>
-            </select>
-            <button><i class="fas fa-search"></i> Tìm kiếm</button>
+            <form action="${pageContext.request.contextPath}/" method="get"
+                  class="d-flex gap-2 w-100">
+
+                <!-- Từ khóa / địa điểm -->
+                <input type="text"
+                       name="keyword"
+                       value="${param.keyword}"
+                       placeholder="Bạn muốn tìm ở đâu?"
+                       class="form-control flex-grow-1">
+
+                <!-- Mức giá -->
+                <select name="priceRange" class="form-select" style="flex: 0 0 150px;">
+                    <option value="">Mức giá</option>
+                    <option value="1" ${param.priceRange=='1'?'selected':''}>Dưới 2 triệu</option>
+                    <option value="2" ${param.priceRange=='2'?'selected':''}>2 - 5 triệu</option>
+                    <option value="3" ${param.priceRange=='3'?'selected':''}>Trên 5 triệu</option>
+                </select>
+
+                <!-- Diện tích -->
+                <select name="areaRange" class="form-select" style="flex: 0 0 150px;">
+                    <option value="">Diện tích</option>
+                    <option value="1" ${param.areaRange=='1'?'selected':''}>Dưới 20m²</option>
+                    <option value="2" ${param.areaRange=='2'?'selected':''}>20 - 30m²</option>
+                    <option value="3" ${param.areaRange=='3'?'selected':''}>Trên 30m²</option>
+                </select>
+
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+            </form>
         </div>
+
     </div>
 </section>

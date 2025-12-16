@@ -28,27 +28,30 @@ public class HomepageController {
     }
 
     @GetMapping("/")
-    public String getHomepage(Model model ,@RequestParam("page") Optional<String> pageOptional){
-        int page = 1;
-        try {
-            if (pageOptional.isPresent()) {
-                //convert from string to int
-                page = Integer.parseInt(pageOptional.get());
-            } else {
-                //page=1
-            }
-        } catch (Exception e) {
-            //page=1
-            //todo1 : handle exceptoin
-        }
+    public String getHomepage(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String priceRange,
+            @RequestParam(required = false) String areaRange,
+            @RequestParam(defaultValue = "1") int page,
+            Model model
+    ) {
         Pageable pageable = PageRequest.of(page - 1, 8);
-        Page<RoomListing> posts = postService.getAllPosts(pageable);
-        List<RoomListing> listPosts = posts.getContent();
-        model.addAttribute("posts", listPosts);
+
+        Page<RoomListing> posts;
+
+        if (keyword != null || priceRange != null || areaRange != null) {
+            posts = postService.searchPosts(keyword, priceRange, areaRange, pageable);
+        } else {
+            posts = postService.getAllPosts(pageable);
+        }
+
+        model.addAttribute("posts", posts.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", posts.getTotalPages());
+
         return "client/homepage/show";
     }
+
 
     @GetMapping("/rentalroom")
     public String getRentalRoom(Model model,@RequestParam("page") Optional<String> pageOptional){
