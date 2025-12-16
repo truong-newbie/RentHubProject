@@ -101,7 +101,7 @@
             <table class="table table-bordered table-hover bg-white">
                 <thead class="table-primary text-center">
                 <tr>
-                    <th>Id</th>
+                    <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Ngày đăng</th>
                     <th>Trạng thái</th>
@@ -116,9 +116,9 @@
                         <td>${post.createdAtFormatted}</td>
                         <td><span class="badge bg-success">${post.status}</span></td>
                         <td>
-                            <a href="/admin/post/detail/${post.id}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                            <a href="/admin/post/hide/${post.id}" class="btn btn-sm btn-warning"><i class="fas fa-eye-slash"></i></a>
-                            <a href="/admin/post/delete/${post.id}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                            <a href="/owner/post/detail/${post.id}" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                            <a href="/owner/post/update/${post.id}" class="btn btn-sm btn-warning"><i class="fas fa-eye-slash"></i></a>
+                            <a href="/owner/post/delete/${post.id}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 </c:forEach>

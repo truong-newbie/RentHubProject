@@ -213,59 +213,71 @@
 
         <!-- Listings -->
         <div class="col-lg-9">
-            <div class="listings-header">
-                <div class="total-results">Tổng <strong>0</strong> kết quả</div>
-                <select class="sort-select">
-                    <option value="newest">Mới nhất</option>
-                    <option value="price-asc">Giá thấp đến cao</option>
-                    <option value="price-desc">Giá cao đến thấp</option>
-                    <option value="area-asc">Diện tích nhỏ đến lớn</option>
-                    <option value="area-desc">Diện tích lớn đến nhỏ</option>
-                </select>
-            </div>
 
 
-            <c:forEach var="entireHouse" items="${entireHouses}">
-                <div class="listing-card">
-                    <div class="listing-image">
-                        <img src="${pageContext.request.contextPath}/resources/images/roomImages/${entireHouse.images[0]}" alt="Nhà nguyên căn">
-                        <span class="hot-badge">HOT</span>
-                        <div class="review-badge">
-                            <i class="fas fa-play-circle"></i> Review
-                        </div>
-                        <button class="favorite-btn">
-                            <i class="far fa-heart" style="color: #FF4444;"></i>
-                        </button>
-                    </div>
-                    <div class="listing-content">
-                        <h3 class="listing-title">${entireHouse.title}</h3>
-                        <a href="room/${entireHouse.id}" class="listing-title"> ${entireHouse.title}</a>
-                        <div class="listing-price">Từ ${entireHouse.price} triệu/tháng</div>
-                        <span class="listing-type">${entireHouse.rentalType}</span>
-                        <div class="listing-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            ${entireHouse.address}
-                        </div>
-                    </div>
+
+            <c:if test="${empty entireHouses}">
+                <div class="alert alert-warning text-center" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Hiện tại chưa có bài đăng nhà nguyên căn nào .
                 </div>
-            </c:forEach>
+            </c:if>
+            <c:if test="${not empty entireHouses}">
+                <div class="row g-3">
+                    <c:forEach var="entireHouse" items="${entireHouses}">
+                        <div class="listing-card">
+                            <div class="listing-image">
+                                <img src="${pageContext.request.contextPath}/resources/images/roomImages/${entireHouse.images[0]}" alt="Nhà nguyên căn">
+                                <span class="hot-badge">HOT</span>
+                                <div class="review-badge">
+                                    <i class="fas fa-play-circle"></i> Review
+                                </div>
+                                <button class="favorite-btn">
+                                    <i class="far fa-heart" style="color: #FF4444;"></i>
+                                </button>
+                            </div>
+                            <div class="listing-content">
+                                <h3 class="listing-title">${entireHouse.title}</h3>
+                                <a href="room/${entireHouse.id}" class="listing-title"> ${entireHouse.title}</a>
+                                <div class="listing-price">Từ ${entireHouse.price} triệu/tháng</div>
+                                <span class="listing-type">${entireHouse.rentalType}</span>
+                                <div class="listing-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                        ${entireHouse.address}
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
 
-            <!-- Pagination -->
-<%--            <nav aria-label="Page navigation" class="mt-4">--%>
-<%--                <ul class="pagination justify-content-center">--%>
-<%--                    <li class="page-item disabled">--%>
-<%--                        <a class="page-link" href="#" tabindex="-1">Trước</a>--%>
-<%--                    </li>--%>
-<%--                    <li class="page-item active"><a class="page-link" href="#">1</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">...</a></li>--%>
-<%--                    <li class="page-item"><a class="page-link" href="#">194</a></li>--%>
-<%--                    <li class="page-item">--%>
-<%--                        <a class="page-link" href="#">Sau</a>--%>
-<%--                    </li>--%>
-<%--                </ul>--%>
-<%--            </nav>--%>
+                </div>        <table class="table table-bordered table-hover bg-white">
+            </table>
+            </c:if>
+            <c:if test="${totalPages > 0}">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="${1 eq currentPage ? 'disabled page-link': 'page-link'}"
+                               href="/entirehouse/?page=${currentPage -1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
+                            <li class="page-item"><a
+                                    class="${loop.index+1 eq currentPage ? 'active page-link': 'page-link'}"
+                                    href="/entirehouse/?page=${loop.index+1}">${loop.index +1}</a>
+                            </li>
+                        </c:forEach>
+                        <li class="page-item">
+                            <a class="${totalPages eq currentPage ? 'disabled page-link': 'page-link'}"
+                               href="/entirehouse/?page=${currentPage +1}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </c:if>
+
         </div>
     </div>
 </div>

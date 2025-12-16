@@ -8,10 +8,7 @@ import com.example.renthubproject.service.UploadService;
 import com.example.renthubproject.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
@@ -54,4 +51,38 @@ public class ItemPostController {
         this.postService.handleSavePost(room);
         return "redirect:/owner";
     }
+
+    @GetMapping("/owner/post/detail/{id}")
+    public String getDetailPost(Model model, @PathVariable long id){
+        RoomListing room= this.postService.getPostById(id);
+        model.addAttribute("room", room);
+        return "owner/post/detail";
+    }
+
+    @GetMapping("/owner/post/update/{id}")
+    public String getUpdatePost(Model model, @PathVariable long id){
+        RoomListing room = this.postService.getPostById(id);
+        model.addAttribute("room",room);
+        return "owner/post/update";
+    }
+
+    @PostMapping("/owner/post/update/{id}")
+    public String handleUpdatePost(Model model, @PathVariable long id, @ModelAttribute("room") RoomListing updateRoom){
+        this.postService.handleUpdatePost(id,updateRoom);
+        return "redirect:/owner";
+    }
+
+    @GetMapping("/owner/post/delete/{id}")
+    public String getDeletePost(Model model, @PathVariable long id) {
+        RoomListing room= this.postService.getPostById(id);
+        model.addAttribute("post", room);
+        return "owner/post/delete";
+    }
+
+    @PostMapping("/owner/post/delete/{id}")
+    public String handleDeletePost(@PathVariable long id){
+        this.postService.handleDeletePost(id);
+        return "redirect:/owner";
+    }
+
 }

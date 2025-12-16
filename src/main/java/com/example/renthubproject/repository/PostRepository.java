@@ -42,5 +42,5 @@ public interface PostRepository extends JpaRepository<RoomListing,Long> {
     );
 
     Page<RoomListing> findByStatus(PostStatus status, Pageable pageable);
-
+    Page<RoomListing> findByRentalType(RentalType rentalType, Pageable pageable);
 }

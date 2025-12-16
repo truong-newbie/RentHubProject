@@ -3,6 +3,7 @@ package com.example.renthubproject.service;
 import com.example.renthubproject.domain.model.PostStatus;
 import com.example.renthubproject.domain.model.RentalType;
 import com.example.renthubproject.domain.model.RoomListing;
+import com.example.renthubproject.domain.model.User;
 import com.example.renthubproject.repository.PostRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +47,24 @@ public class PostService {
         }
         return posts;
     }
+
+    public void handleUpdatePost(Long id, RoomListing updateRoom){
+        RoomListing existingRoom = this.postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post không tồn tại"));
+        existingRoom.setTitle(updateRoom.getTitle());
+        existingRoom.setAddress(updateRoom.getAddress());
+        existingRoom.setDescription(updateRoom.getDescription());
+        existingRoom.setPrice(updateRoom.getPrice());
+        existingRoom.setRoomNumber(updateRoom.getRoomNumber());
+        existingRoom.setArea(updateRoom.getArea());
+        existingRoom.setAmenities(updateRoom.getAmenities());
+        existingRoom.setNeighborhood(updateRoom.getNeighborhood());
+        existingRoom.setTenantType(updateRoom.getTenantType());
+        existingRoom.setOwnerName(updateRoom.getOwnerName());
+        existingRoom.setPhoneNumber(updateRoom.getPhoneNumber());
+        this.postRepository.save(existingRoom);
+    }
+
 
     public List<RoomListing> getEntireHouseInHomepage(){
         List<RoomListing> posts= new ArrayList<>();
@@ -174,6 +193,10 @@ public class PostService {
 
     public Page<RoomListing> getAllPendingPosts( Pageable pageable){
         return this.postRepository.findByStatus(PostStatus.PENDING, pageable);
+    }
+
+    public Page<RoomListing> getAllByRentalType(RentalType rentalType, Pageable pageable){
+        return this.postRepository.findByRentalType(rentalType,pageable);
     }
 
 }
