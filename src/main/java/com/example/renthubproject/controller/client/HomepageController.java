@@ -1,9 +1,7 @@
 package com.example.renthubproject.controller.client;
 
 import com.example.renthubproject.domain.dto.RegisterDTO;
-import com.example.renthubproject.domain.model.RentalType;
-import com.example.renthubproject.domain.model.RoomListing;
-import com.example.renthubproject.domain.model.User;
+import com.example.renthubproject.domain.model.*;
 import com.example.renthubproject.service.PostService;
 import com.example.renthubproject.service.UserService;
 import jakarta.validation.Valid;
@@ -54,73 +52,102 @@ public class HomepageController {
 
 
     @GetMapping("/rentalroom")
-    public String getRentalRoom(Model model,@RequestParam("page") Optional<String> pageOptional){
-        int page = 1;
-        try {
-            if (pageOptional.isPresent()) {
-                //convert from string to int
-                page = Integer.parseInt(pageOptional.get());
-            } else {
-                //page=1
-            }
-        } catch (Exception e) {
-            //page=1
-            //todo1 : handle exceptoin
-        }
+    public String getRentalRoom(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String priceRange,
+            @RequestParam(required = false) String areaRange,
+
+            @RequestParam(required = false, name = "amenity") List<String> amenities,
+            @RequestParam(required = false, name = "target") List<String> tenantTypes,
+
+            @RequestParam(defaultValue = "1") int page,
+            Model model
+    ) {
         Pageable pageable = PageRequest.of(page - 1, 8);
-        Page<RoomListing> rentalRooms = postService.getAllByRentalType(RentalType.PHONG_TRO,pageable);
-        List<RoomListing> listrentalRooms = rentalRooms.getContent();
-        model.addAttribute("rentalRooms", listrentalRooms);
+
+        Page<RoomListing> rentalRooms =
+                postService.searchRoom(
+                        RentalType.PHONG_TRO,
+                        keyword,
+                        priceRange,
+                        areaRange,
+                        amenities,
+                        tenantTypes,
+                        pageable
+                );
+
+        model.addAttribute("rentalRooms", rentalRooms.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", rentalRooms.getTotalPages());
+
         return "client/homepage/rental_room";
     }
 
+
     @GetMapping("/entirehouse")
-    public String getEntireHouse(Model model,@RequestParam("page") Optional<String> pageOptional){
-        int page = 1;
-        try {
-            if (pageOptional.isPresent()) {
-                //convert from string to int
-                page = Integer.parseInt(pageOptional.get());
-            } else {
-                //page=1
-            }
-        } catch (Exception e) {
-            //page=1
-            //todo1 : handle exceptoin
-        }
+    public String getEntireHouse(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String priceRange,
+            @RequestParam(required = false) String areaRange,
+
+            @RequestParam(required = false, name = "amenity") List<String> amenities,
+            @RequestParam(required = false, name = "target") List<String> tenantTypes,
+
+            @RequestParam(defaultValue = "1") int page,
+            Model model
+    ) {
         Pageable pageable = PageRequest.of(page - 1, 8);
-        Page<RoomListing> entireHouses = postService.getAllByRentalType(RentalType.NHA_NGUYEN_CAN,pageable);
-        List<RoomListing> listentireHouses = entireHouses.getContent();
-        model.addAttribute("entireHouses", listentireHouses);
+
+        Page<RoomListing> entireHouses =
+                postService.searchRoom(
+                        RentalType.NHA_NGUYEN_CAN,
+                        keyword,
+                        priceRange,
+                        areaRange,
+                        amenities,
+                        tenantTypes,
+                        pageable
+                );
+
+        model.addAttribute("entireHouses", entireHouses.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", entireHouses.getTotalPages());
+
         return "client/homepage/entire_house";
     }
 
     @GetMapping("/flat")
-    public String getFlat(Model model,@RequestParam("page") Optional<String> pageOptional){
-        int page = 1;
-        try {
-            if (pageOptional.isPresent()) {
-                //convert from string to int
-                page = Integer.parseInt(pageOptional.get());
-            } else {
-                //page=1
-            }
-        } catch (Exception e) {
-            //page=1
-            //todo1 : handle exceptoin
-        }
+    public String getFlat(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String priceRange,
+            @RequestParam(required = false) String areaRange,
+
+            @RequestParam(required = false, name = "amenity") List<String> amenities,
+            @RequestParam(required = false, name = "target") List<String> tenantTypes,
+
+            @RequestParam(defaultValue = "1") int page,
+            Model model
+    ) {
         Pageable pageable = PageRequest.of(page - 1, 8);
-        Page<RoomListing> flats = postService.getAllByRentalType(RentalType.CAN_HO ,pageable);
-        List<RoomListing> listFlats = flats.getContent();
-        model.addAttribute("flats", listFlats);
+
+        Page<RoomListing> flats =
+                postService.searchRoom(
+                        RentalType.CAN_HO,
+                        keyword,
+                        priceRange,
+                        areaRange,
+                        amenities,
+                        tenantTypes,
+                        pageable
+                );
+
+        model.addAttribute("flats", flats.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", flats.getTotalPages());
+
         return "client/homepage/flat";
     }
+
 
     @GetMapping("/login")
     public String getLogin(Model model) {

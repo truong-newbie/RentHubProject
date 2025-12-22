@@ -16,16 +16,12 @@
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"/>
+<form method="get" action="/flat">
 <!-- Search Section -->
 <section class="search-section">
     <div class="container">
         <div class="search-box">
             <input type="text" class="search-input" placeholder="Bạn muốn tìm trở ở đâu?">
-            <select class="search-select">
-                <option value="">Nhà trọ, phòng trọ</option>
-                <option value="nguyen-can">Nhà nguyên căn</option>
-                <option value="can-ho">Căn hộ</option>
-            </select>
             <select class="search-select">
                 <option value="">Mức giá</option>
                 <option value="1">Dưới 1 triệu</option>
@@ -55,6 +51,7 @@
 
     <div class="row">
         <!-- Filter Sidebar -->
+        <!-- Filter Sidebar -->
         <div class="col-lg-3">
             <div class="filter-sidebar">
                 <div class="filter-title">
@@ -63,9 +60,7 @@
 
                 <!-- Diện tích -->
                 <div class="filter-section">
-                    <div class="filter-section-title">
-                        Diện tích
-                    </div>
+                    <div class="filter-section-title">Diện tích</div>
                     <div class="filter-checkbox">
                         <input type="checkbox" id="area1" name="area" value="0-20">
                         <label for="area1">Dưới 20 m2</label>
@@ -88,126 +83,124 @@
                     </div>
                 </div>
 
-                <!-- Tiện nghi -->
+                <!-- TIỆN NGHI -->
                 <div class="filter-section">
-                    <div class="filter-section-title">
-                        Tiện nghi
-                    </div>
+                    <div class="filter-section-title">Tiện nghi</div>
+
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity1" name="amenity" value="gac-lung">
+                        <input type="checkbox" id="amenity1" name="amenity" value="MEZZANINE">
                         <label for="amenity1">Gác lửng</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity2" name="amenity" value="wifi">
+                        <input type="checkbox" id="amenity2" name="amenity" value="WIFI">
                         <label for="amenity2">Wifi</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity3" name="amenity" value="ve-sinh-trong">
+                        <input type="checkbox" id="amenity3" name="amenity" value="PRIVATE_WC">
                         <label for="amenity3">Vệ sinh trong</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity4" name="amenity" value="phong-tam">
+                        <input type="checkbox" id="amenity4" name="amenity" value="BATHROOM">
                         <label for="amenity4">Phòng tắm</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity5" name="amenity" value="binh-nong-lanh">
+                        <input type="checkbox" id="amenity5" name="amenity" value="WATER_HEATER">
                         <label for="amenity5">Bình nóng lạnh</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity6" name="amenity" value="ke-bep">
+                        <input type="checkbox" id="amenity6" name="amenity" value="KITCHEN_SHELF">
                         <label for="amenity6">Kệ bếp</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity7" name="amenity" value="may-giat">
+                        <input type="checkbox" id="amenity7" name="amenity" value="WASHING_MACHINE">
                         <label for="amenity7">Máy giặt</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity8" name="amenity" value="ti-vi">
+                        <input type="checkbox" id="amenity8" name="amenity" value="TV">
                         <label for="amenity8">Tivi</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity9" name="amenity" value="dieu-hoa">
+                        <input type="checkbox" id="amenity9" name="amenity" value="AC">
                         <label for="amenity9">Điều hòa</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity10" name="amenity" value="tu-lanh">
+                        <input type="checkbox" id="amenity10" name="amenity" value="FRIDGE">
                         <label for="amenity10">Tủ lạnh</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity11" name="amenity" value="giuong-nem">
+                        <input type="checkbox" id="amenity11" name="amenity" value="BED">
                         <label for="amenity11">Giường nệm</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="amenity12" name="amenity" value="tu-quan-ao">
+                        <input type="checkbox" id="amenity12" name="amenity" value="WARDROBE">
                         <label for="amenity12">Tủ quần áo</label>
                     </div>
                 </div>
 
-                <!-- Môi trường xung quanh -->
+                <!-- MÔI TRƯỜNG XUNG QUANH -->
                 <div class="filter-section">
-                    <div class="filter-section-title">
-                        Môi trường xung quanh
-                    </div>
+                    <div class="filter-section-title">Môi trường xung quanh</div>
+
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="env1" name="environment" value="cho">
+                        <input type="checkbox" id="env1" name="environment" value="MARKET">
                         <label for="env1">Chợ</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="env2" name="environment" value="sieu-thi">
+                        <input type="checkbox" id="env2" name="environment" value="SUPERMARKET">
                         <label for="env2">Siêu thị</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="env3" name="environment" value="benh-vien">
+                        <input type="checkbox" id="env3" name="environment" value="HOSPITAL">
                         <label for="env3">Bệnh viện</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="env4" name="environment" value="truong-hoc">
+                        <input type="checkbox" id="env4" name="environment" value="SCHOOL">
                         <label for="env4">Trường học</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="env5" name="environment" value="cong-vien">
+                        <input type="checkbox" id="env5" name="environment" value="PARK">
                         <label for="env5">Công viên</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="env6" name="environment" value="ben-xe">
+                        <input type="checkbox" id="env6" name="environment" value="BUS_STOP">
                         <label for="env6">Bến xe bus</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="env7" name="environment" value="gym">
+                        <input type="checkbox" id="env7" name="environment" value="SPORT_CENTER">
                         <label for="env7">Trung tâm thể dục thể thao</label>
                     </div>
                 </div>
 
-                <!-- Đối tượng -->
+                <!-- ĐỐI TƯỢNG -->
                 <div class="filter-section">
-                    <div class="filter-section-title">
-                        Đối tượng
-                    </div>
+                    <div class="filter-section-title">Đối tượng</div>
+
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="target1" name="target" value="di-hoc">
+                        <input type="checkbox" id="target1" name="target" value="HOC_SINH">
                         <label for="target1">Đi học</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="target2" name="target" value="di-lam">
+                        <input type="checkbox" id="target2" name="target" value="DI_LAM">
                         <label for="target2">Đi làm</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="target3" name="target" value="gia-dinh">
+                        <input type="checkbox" id="target3" name="target" value="GIA_DINH">
                         <label for="target3">Gia đình</label>
                     </div>
                     <div class="filter-checkbox">
-                        <input type="checkbox" id="target4" name="target" value="cap-doi">
+                        <input type="checkbox" id="target4" name="target" value="CAP_DOI">
                         <label for="target4">Cặp đôi</label>
                     </div>
                 </div>
 
-                <!-- Filter Actions -->
+                <!-- ACTION -->
                 <div class="filter-actions">
                     <button class="btn-apply-filter">Tìm ngay</button>
-                    <button class="btn-clear-filter">Xoá bộ lọc</button>
+                    <button type="reset" class="btn-clear-filter">Xoá bộ lọc</button>
                 </div>
             </div>
         </div>
+
 
         <!-- Listings -->
         <div class="col-lg-9">
@@ -276,6 +269,7 @@
         </div>
     </div>
 </div>
+</form>
 
 <jsp:include page="../layout/footer.jsp"/>
 <!-- Bootstrap JS (bundle includes Popper) -->

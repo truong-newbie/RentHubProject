@@ -270,19 +270,19 @@
             <div class="checkbox-group">
                 <div class="row">
                     <div class="col-md-3 form-check">
-                        <form:checkbox path="tenantType" value="HOC_SINH" id="typeHocSinh" class="form-check-input me-2"/>
+                        <form:checkbox path="tenantTypes" value="HOC_SINH" id="typeHocSinh" class="form-check-input me-2"/>
                         <label class="form-check-label" for="typeHocSinh">Học sinh - Sinh viên</label>
                     </div>
                     <div class="col-md-3 form-check">
-                        <form:checkbox path="tenantType" value="DI_LAM" id="typeDiLam" class="form-check-input me-2"/>
+                        <form:checkbox path="tenantTypes" value="DI_LAM" id="typeDiLam" class="form-check-input me-2"/>
                         <label class="form-check-label" for="typeDiLam">Người đi làm</label>
                     </div>
                     <div class="col-md-3 form-check">
-                        <form:checkbox path="tenantType" value="GIA_DINH" id="typeGiaDinh" class="form-check-input me-2"/>
+                        <form:checkbox path="tenantTypes" value="GIA_DINH" id="typeGiaDinh" class="form-check-input me-2"/>
                         <label class="form-check-label" for="typeGiaDinh">Gia đình</label>
                     </div>
                     <div class="col-md-3 form-check">
-                        <form:checkbox path="tenantType" value="CAP_DOI" id="typeCapDoi" class="form-check-input me-2"/>
+                        <form:checkbox path="tenantTypes" value="CAP_DOI" id="typeCapDoi" class="form-check-input me-2"/>
                         <label class="form-check-label" for="typeCapDoi">Cặp đôi</label>
                     </div>
                 </div>

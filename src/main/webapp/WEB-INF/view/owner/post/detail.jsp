@@ -283,10 +283,10 @@
                 Đối tượng phù hợp
             </h2>
             <ul class="tenant-list">
-                <c:forEach items="${room.tenantType}" var="item">
+                <c:forEach items="${room.tenantTypes}" var="item">
                     <li>
                         <i class="bi bi-check-circle-fill"></i>
-                            ${item}
+                            ${item.label}
                     </li>
                 </c:forEach>
             </ul>
@@ -302,7 +302,7 @@
                 <c:forEach items="${room.amenities}" var="item">
                     <div class="feature-item">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>${item}</span>
+                        <span>${item.label}</span>
                     </div>
                 </c:forEach>
             </div>
@@ -318,7 +318,7 @@
                 <c:forEach items="${room.neighborhood}" var="item">
                     <div class="feature-item location">
                         <i class="bi bi-geo-alt-fill"></i>
-                        <span>${item}</span>
+                        <span>${item.label}</span>
                     </div>
                 </c:forEach>
             </div>

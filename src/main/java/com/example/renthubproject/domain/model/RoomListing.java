@@ -42,17 +42,20 @@ public class RoomListing {
     @ElementCollection // Đánh dấu đây là một Collection của các kiểu cơ bản
     @CollectionTable(name = "room_amenities", joinColumns = @JoinColumn(name = "room_id")) // Tạo bảng riêng
     @Column(name = "amenity_name") // Tên cột trong bảng mới chứa các chuỗi
-    private List<String> amenities; // tien nghi
+    @Enumerated(EnumType.STRING)
+    private List<Amenity> amenities; // tien nghi
 
     @ElementCollection
     @CollectionTable(name = "room_neighborhood", joinColumns = @JoinColumn(name = "room_id"))
     @Column(name = "neighborhood_name")
-    private List<String> neighborhood;  // moi truong xung quanh
+    @Enumerated(EnumType.STRING)
+    private List<Neighborhood> neighborhood;  // moi truong xung quanh
 
     @ElementCollection
     @CollectionTable(name = "room_tenantType", joinColumns = @JoinColumn(name = "room_id"))
     @Column(name = "tenantType_name")
-    private List<String> tenantType;  //doi tuong thue
+    @Enumerated(EnumType.STRING)
+    private List<TenantType> tenantTypes;  //doi tuong thue
 
     private String phoneNumber;
     private long roomNumber;

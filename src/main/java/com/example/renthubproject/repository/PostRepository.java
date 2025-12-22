@@ -62,4 +62,34 @@ AND (:maxArea IS NULL OR r.area <= :maxArea)
             Pageable pageable
     );
 
+    @Query("""
+SELECT DISTINCT r FROM RoomListing r
+WHERE r.rentalType = :type
+AND (:keyword IS NULL OR r.title LIKE %:keyword% OR r.address LIKE %:keyword%)
+AND (:minPrice IS NULL OR r.price >= :minPrice)
+AND (:maxPrice IS NULL OR r.price <= :maxPrice)
+AND (:minArea IS NULL OR r.area >= :minArea)
+AND (:maxArea IS NULL OR r.area <= :maxArea)
+AND (:amenities IS NULL OR EXISTS (
+    SELECT a FROM r.amenities a WHERE a IN :amenities
+))
+AND (:tenantTypes IS NULL OR EXISTS (
+    SELECT t FROM r.tenantTypes t WHERE t IN :tenantTypes
+))
+""")
+    Page<RoomListing> searchAdvanced(
+            @Param("type") RentalType type,
+            @Param("keyword") String keyword,
+            @Param("minPrice") Double minPrice,
+            @Param("maxPrice") Double maxPrice,
+            @Param("minArea") Double minArea,
+            @Param("maxArea") Double maxArea,
+            @Param("amenities") List<String> amenities,
+            @Param("tenantTypes") List<String> tenantTypes,
+            Pageable pageable
+    );
+
+
+
+
 }

@@ -59,7 +59,7 @@ public class PostService {
         existingRoom.setArea(updateRoom.getArea());
         existingRoom.setAmenities(updateRoom.getAmenities());
         existingRoom.setNeighborhood(updateRoom.getNeighborhood());
-        existingRoom.setTenantType(updateRoom.getTenantType());
+        existingRoom.setTenantTypes(updateRoom.getTenantTypes());
         existingRoom.setOwnerName(updateRoom.getOwnerName());
         existingRoom.setPhoneNumber(updateRoom.getPhoneNumber());
         this.postRepository.save(existingRoom);
@@ -239,6 +239,44 @@ public class PostService {
                 pageable
         );
     }
+
+    public Page<RoomListing> searchRoom(
+            RentalType type,
+            String keyword,
+            String priceRange,
+            String areaRange,
+            List<String> amenities,
+            List<String> tenantTypes,
+            Pageable pageable
+    ) {
+        Double minPrice = null, maxPrice = null;
+        Double minArea = null, maxArea = null;
+
+        // xử lý priceRange
+        if (priceRange != null) {
+            switch (priceRange) {
+                case "1" -> maxPrice = 1.0;
+                case "2" -> { minPrice = 1.0; maxPrice = 2.0; }
+                case "3" -> { minPrice = 2.0; maxPrice = 3.0; }
+                case "4" -> { minPrice = 3.0; maxPrice = 5.0; }
+                case "5" -> minPrice = 5.0;
+            }
+        }
+
+        return postRepository.searchAdvanced(
+                type,
+                keyword,
+                minPrice,
+                maxPrice,
+                minArea,
+                maxArea,
+                amenities == null || amenities.isEmpty() ? null : amenities,
+                tenantTypes == null || tenantTypes.isEmpty() ? null : tenantTypes,
+                pageable
+        );
+    }
+
+
 
 
 }
