@@ -9,193 +9,126 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" type="text/css">
     <style>
+        body {
+            background-color: #f5f6f8;
+        }
+
         .create-card {
-            border: none;
-            border-radius: 16px;
-            overflow: hidden;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background-color: #ffffff;
         }
 
         .create-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            margin: -1.5rem -1.5rem 2rem -1.5rem;
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 1.25rem;
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
         }
 
         .create-header h4 {
             margin: 0;
+            font-size: 1.25rem;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            color: #212529;
         }
 
         .form-section {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 2rem;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 1.25rem;
             margin-bottom: 1.5rem;
+            background-color: #ffffff;
         }
 
         .form-label {
-            font-weight: 600;
+            font-weight: 500;
             color: #495057;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
-        .form-label i {
-            color: #667eea;
-            font-size: 0.9rem;
+        .form-control,
+        .form-select {
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+            padding: 0.5rem 0.75rem;
         }
 
-        .form-control, .form-select {
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
-        }
-
-        .input-group {
-            border-radius: 8px;
-            overflow: hidden;
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #86b7fe;
+            box-shadow: none;
         }
 
         .input-group-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            font-weight: 600;
-            padding: 0.75rem 1.25rem;
+            background-color: #f1f3f5;
+            border: 1px solid #ced4da;
+            font-weight: 500;
+        }
+
+        .required-mark {
+            color: #dc3545;
+        }
+
+        .info-badge {
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #6c757d;
         }
 
         .file-upload-wrapper {
-            position: relative;
-            border: 3px dashed #667eea;
-            border-radius: 12px;
-            padding: 2rem;
+            border: 1px dashed #adb5bd;
+            border-radius: 6px;
+            padding: 1.5rem;
             text-align: center;
-            background: white;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .file-upload-wrapper:hover {
-            background: #f8f9fa;
-            border-color: #764ba2;
-        }
-
-        .file-upload-wrapper input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
+            background-color: #f8f9fa;
         }
 
         .file-upload-icon {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
         }
 
         .file-upload-text {
             color: #6c757d;
-            font-weight: 500;
-        }
-
-        .preview-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            font-size: 0.9rem;
         }
 
         .preview-item {
-            position: relative;
-            padding-bottom: 100%;
-            border-radius: 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .preview-item img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .btn-save {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            border: none;
-            padding: 0.75rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s ease;
+        .section-divider {
+            border-top: 1px solid #dee2e6;
+            margin: 1.5rem 0;
         }
 
-        .btn-save:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
-            background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+        .btn-save {
+            background-color: #0d6efd;
+            border-radius: 6px;
+            padding: 0.45rem 1.5rem;
+            font-weight: 500;
         }
 
         .btn-cancel {
-            background: #6c757d;
-            border: none;
-            padding: 0.75rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-cancel:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
-            background: #5a6268;
-        }
-
-        .form-floating-label {
-            position: relative;
-        }
-
-        .required-mark {
-            color: #dc3545;
-            margin-left: 0.25rem;
-        }
-
-        .section-divider {
-            height: 2px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            margin: 2rem 0;
-            border-radius: 2px;
-        }
-
-        .info-badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            background: #e7f3ff;
-            color: #0066cc;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
+            background-color: #6c757d;
+            border-radius: 6px;
+            padding: 0.45rem 1.5rem;
+            font-weight: 500;
+            color: #fff;
         }
     </style>
+
     <script>
         $(document).ready(() => {
             const avatarFile = $("#roomFile");

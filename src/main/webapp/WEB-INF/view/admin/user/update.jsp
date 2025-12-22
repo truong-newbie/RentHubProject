@@ -21,44 +21,47 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #f4f6f9;
+            font-size: 14px;
+        }
+
         .update-user-card {
-            border: none;
-            border-radius: 16px;
-            overflow: hidden;
+            border-radius: 6px;
+            border: 1px solid #dee2e6;
+            background: #fff;
         }
 
         .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            margin: -1.5rem -1.5rem 2rem -1.5rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .page-header h4 {
             margin: 0;
+            font-size: 16px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            color: #212529;
         }
 
         .avatar-section {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            background: #fff;
+            border: 1px solid #dee2e6;
+            padding: 1.25rem;
             text-align: center;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
         }
 
         .current-avatar-wrapper {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             overflow: hidden;
-            margin: 0 auto 1.5rem;
-            border: 4px solid white;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            position: relative;
+            margin: 0 auto 1rem;
+            border: 1px solid #dee2e6;
         }
 
         .current-avatar-wrapper img {
@@ -67,185 +70,85 @@
             object-fit: cover;
         }
 
-        .avatar-upload-btn {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-
         .upload-button-styled {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .upload-button-styled:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        .avatar-upload-btn input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .preview-wrapper {
-            margin-top: 1.5rem;
-            display: none;
-        }
-
-        .preview-avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto;
-            border: 4px solid #667eea;
-            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
-        }
-
-        .preview-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .preview-label {
-            color: #667eea;
-            font-weight: 600;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
+            background: #e9ecef;
+            color: #212529;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 14px;
+            border: 1px solid #ced4da;
         }
 
         .form-section {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 2rem;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 1.25rem;
+            background: #fff;
             margin-bottom: 1.5rem;
         }
 
         .section-title {
+            font-size: 15px;
             font-weight: 600;
-            color: #495057;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .section-title i {
-            color: #667eea;
-            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #343a40;
         }
 
         .form-label {
-            font-weight: 600;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
             color: #495057;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
-        .form-label i {
-            color: #667eea;
-            font-size: 0.9rem;
+        .form-control,
+        .form-select {
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            font-size: 14px;
         }
 
-        .required-mark {
-            color: #dc3545;
-            margin-left: 0.25rem;
-        }
-
-        .form-control, .form-select {
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
-        }
-
-        .form-control.is-invalid, .form-select.is-invalid {
-            border-color: #dc3545;
+        .form-control:focus,
+        .form-select:focus {
+            box-shadow: none;
+            border-color: #86b7fe;
         }
 
         .invalid-feedback {
-            display: block;
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
-            color: #dc3545;
-            font-weight: 500;
-        }
-
-        .section-divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, #667eea 50%, transparent 100%);
-            border: none;
-            margin: 2rem 0;
+            font-size: 13px;
         }
 
         .btn-save {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            background: #0d6efd;
             border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .btn-save:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
-            background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
-            color: white;
+            padding: 6px 16px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: #fff;
         }
 
         .btn-cancel {
             background: #6c757d;
             border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s ease;
+            padding: 6px 16px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: #fff;
         }
 
+        .btn-save:hover,
         .btn-cancel:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
-            background: #5a6268;
-            color: white;
+            opacity: 0.9;
         }
 
         .info-badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            background: #e7f3ff;
-            color: #0066cc;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .section-divider {
+            display: none;
         }
     </style>
+
 </head>
 <body>
 <jsp:include page="../layout/sidebar.jsp" />

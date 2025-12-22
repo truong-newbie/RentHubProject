@@ -9,47 +9,31 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #f5f6f8;
+        }
+
         .user-detail-card {
-            border: none;
-            border-radius: 16px;
-            overflow: hidden;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background-color: #ffffff;
         }
 
+        /* Header */
         .profile-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 2rem 1.5rem;
             text-align: center;
-            position: relative;
-        }
-
-        .profile-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,106.7C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
-            opacity: 0.3;
-        }
-
-        .avatar-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 1.5rem;
         }
 
         .avatar-wrapper {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             overflow: hidden;
-            border: 5px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 1;
+            border: 1px solid #dee2e6;
+            margin: 0 auto 1rem;
         }
 
         .avatar-wrapper img {
@@ -59,133 +43,102 @@
         }
 
         .user-name {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin: 1rem 0 0.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #212529;
         }
 
         .role-badge {
             display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border: 2px solid rgba(255,255,255,0.3);
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 4px;
+            background-color: #e9ecef;
+            color: #495057;
         }
 
+        /* Info section */
         .info-section {
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .info-table {
-            background: #f8f9fa;
-            border-radius: 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
             overflow: hidden;
-            border: none;
-        }
-
-        .info-table tr {
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .info-table tr:last-child {
-            border-bottom: none;
+            margin-bottom: 0;
         }
 
         .info-table th {
-            background: white;
+            width: 180px;
+            background-color: #f8f9fa;
+            font-weight: 500;
             color: #495057;
-            font-weight: 600;
-            padding: 1rem 1.5rem;
-            width: 200px;
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .info-table th i {
-            color: #667eea;
-            font-size: 1.1rem;
+            border-right: 1px solid #dee2e6;
+            padding: 0.75rem 1rem;
         }
 
         .info-table td {
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 1rem;
             color: #212529;
-            font-weight: 500;
-            border: none;
-            background: #f8f9fa;
         }
 
-        .back-button {
-            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s ease;
+        .info-table tr:last-child th,
+        .info-table tr:last-child td {
+            border-bottom: none;
         }
 
-        .back-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
-            background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
-            color: white;
+        /* Stats */
+        .section-divider {
+            border-top: 1px solid #dee2e6;
+            margin: 1.5rem 0;
         }
 
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
-            margin-top: 2rem;
-            padding: 0 2rem 2rem;
+            padding: 0 1.5rem 1.5rem;
         }
 
         .stat-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 1rem;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border: 2px solid #e9ecef;
+            background-color: #ffffff;
         }
 
         .stat-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 0.75rem;
             font-size: 1.25rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
         }
 
         .stat-label {
             font-size: 0.85rem;
             color: #6c757d;
-            font-weight: 600;
             margin-bottom: 0.25rem;
         }
 
         .stat-value {
-            font-size: 1.25rem;
-            font-weight: 700;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: #212529;
         }
 
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, #667eea 50%, transparent 100%);
-            margin: 2rem 0;
+        /* Button */
+        .back-button {
+            background-color: #6c757d;
+            border-radius: 6px;
+            padding: 0.45rem 1.5rem;
+            font-weight: 500;
+            color: #fff;
         }
     </style>
+
 </head>
 <body>
 <jsp:include page="../layout/sidebar.jsp" />

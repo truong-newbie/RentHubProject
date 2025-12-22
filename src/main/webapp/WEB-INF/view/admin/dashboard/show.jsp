@@ -179,7 +179,7 @@
                                             <td>${post.user.fullName}</td>
                                             <td><strong class="text-danger">${post.price} triệu/tháng</strong></td>
                                         <td><span class="badge bg-warning badge-status">${post.status}</span></td>
-                                        <td>${post.createdAtFormatted}</td>
+<%--                                        <td>${post.createdAtFormatted}</td>--%>
                                 </tr>
                                     </c:forEach>
 

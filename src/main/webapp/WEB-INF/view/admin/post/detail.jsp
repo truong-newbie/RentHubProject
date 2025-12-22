@@ -9,40 +9,44 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" type="text/css">
     <style>
+        body {
+            background-color: #f5f6f8;
+        }
+
         .detail-card {
-            border: none;
-            border-radius: 16px;
-            overflow: hidden;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background-color: #ffffff;
         }
 
         .detail-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            margin: -1.5rem -1.5rem 2rem -1.5rem;
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 1.25rem;
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
         }
 
         .detail-header h4 {
             margin: 0;
+            font-size: 1.25rem;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            color: #212529;
         }
 
         .info-section {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 1.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 1rem;
+            background-color: #ffffff;
             margin-bottom: 1.5rem;
         }
 
         .info-row {
             display: grid;
-            grid-template-columns: 180px 1fr;
+            grid-template-columns: 160px 1fr;
             gap: 1rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #e9ecef;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f3f5;
         }
 
         .info-row:last-child {
@@ -51,10 +55,7 @@
 
         .info-label {
             color: #6c757d;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-weight: 500;
         }
 
         .info-value {
@@ -63,85 +64,62 @@
         }
 
         .price-highlight {
-            font-size: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: #dc3545;
-            font-weight: 700;
         }
 
         .image-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.75rem;
         }
 
         .gallery-item {
-            position: relative;
-            padding-bottom: 100%;
-            border-radius: 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+            background-color: #f8f9fa;
+            aspect-ratio: 1 / 1;
         }
 
         .gallery-item img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
         .status-badge {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 4px;
+            font-weight: 500;
         }
 
         .description-box {
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            padding: 1.5rem;
-            line-height: 1.8;
-            color: #495057;
-        }
-
-        .back-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .back-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 1rem;
+            background-color: #ffffff;
+            color: #212529;
+            line-height: 1.6;
         }
 
         .section-title {
+            font-size: 1rem;
             font-weight: 600;
-            color: #495057;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            color: #212529;
+            margin-bottom: 0.75rem;
         }
 
-        .section-title i {
-            color: #667eea;
+        .back-button {
+            background-color: #0d6efd;
+            border-radius: 6px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
         }
     </style>
+
 </head>
 <body>
 <jsp:include page="../layout/sidebar.jsp"/>

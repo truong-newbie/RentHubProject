@@ -22,143 +22,133 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/styles.css" rel="stylesheet" type="text/css">
     <style>
+        body {
+            background-color: #f5f6f8;
+        }
+
         .create-user-card {
-            border: none;
-            border-radius: 16px;
-            overflow: hidden;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background-color: #ffffff;
         }
 
         .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            margin: -1rem -1rem 2rem -1rem;
-            border-radius: 16px 16px 0 0;
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 1.25rem;
+            margin: -1rem -1rem 1.5rem -1rem;
+            border-radius: 8px 8px 0 0;
         }
 
         .page-header h4 {
             margin: 0;
+            font-size: 1.25rem;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            color: #212529;
         }
 
         .form-section {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 2rem;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 1.25rem;
             margin-bottom: 1.5rem;
+            background-color: #ffffff;
         }
 
         .section-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            color: #495057;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .section-title i {
-            color: #667eea;
-            font-size: 1.2rem;
+            color: #212529;
+            margin-bottom: 1rem;
         }
 
         .form-label {
-            font-weight: 600;
+            font-weight: 500;
             color: #495057;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .form-label i {
-            color: #667eea;
-            font-size: 0.9rem;
+            margin-bottom: 0.35rem;
         }
 
         .required-mark {
             color: #dc3545;
-            margin-left: 0.25rem;
         }
 
-        .form-control, .form-select {
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
+        .form-control,
+        .form-select {
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+            padding: 0.5rem 0.75rem;
         }
 
-        .form-control:focus, .form-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #86b7fe;
+            box-shadow: none;
         }
 
-        .form-control.is-invalid, .form-select.is-invalid {
+        .form-control.is-invalid,
+        .form-select.is-invalid {
             border-color: #dc3545;
         }
 
         .invalid-feedback {
             display: block;
-            font-size: 0.875rem;
-            color: #dc3545;
-            margin-top: 0.5rem;
-            padding-left: 0.5rem;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
         }
 
+        .info-badge {
+            display: inline-block;
+            margin-top: 0.4rem;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .section-divider {
+            border-top: 1px solid #dee2e6;
+            margin: 1.5rem 0;
+        }
+
+        /* Avatar upload */
         .avatar-upload-section {
-            background: white;
-            border: 3px dashed #667eea;
-            border-radius: 12px;
-            padding: 2rem;
+            border: 1px dashed #adb5bd;
+            border-radius: 6px;
+            padding: 1.25rem;
             text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            background-color: #f8f9fa;
             position: relative;
-        }
-
-        .avatar-upload-section:hover {
-            background: #f8f9fa;
-            border-color: #764ba2;
         }
 
         .avatar-upload-section input[type="file"] {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             opacity: 0;
             cursor: pointer;
         }
 
         .upload-icon {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
         }
 
         .upload-text {
+            font-size: 0.9rem;
             color: #6c757d;
-            font-weight: 500;
         }
 
         .preview-wrapper {
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             display: none;
+            text-align: center;
         }
 
         .preview-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             overflow: hidden;
-            border: 5px solid #667eea;
-            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.2);
+            border: 1px solid #dee2e6;
+            margin: 0 auto;
         }
 
         .preview-container img {
@@ -167,77 +157,23 @@
             object-fit: cover;
         }
 
+        /* Buttons */
         .btn-create {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            padding: 0.75rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .btn-create:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            color: white;
+            background-color: #0d6efd;
+            border-radius: 6px;
+            padding: 0.45rem 1.5rem;
+            font-weight: 500;
         }
 
         .btn-back {
-            background: #6c757d;
-            border: none;
-            padding: 0.5rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .btn-back:hover {
-            background: #5a6268;
-            color: white;
-            transform: translateY(-1px);
-        }
-
-        .input-icon-wrapper {
-            position: relative;
-        }
-
-        .input-icon-wrapper i {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c757d;
-        }
-
-        .input-icon-wrapper .form-control {
-            padding-left: 2.75rem;
-        }
-
-        .info-badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            background: #e7f3ff;
-            color: #0066cc;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-
-        .role-option-card {
-            transition: all 0.3s ease;
-        }
-
-        .section-divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, #667eea 50%, transparent 100%);
-            border: none;
-            margin: 2rem 0;
+            background-color: #6c757d;
+            border-radius: 6px;
+            padding: 0.4rem 1.25rem;
+            font-weight: 500;
+            color: #fff;
         }
     </style>
+
 </head>
 <body>
 <jsp:include page="../layout/sidebar.jsp"/>
